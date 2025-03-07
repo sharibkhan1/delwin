@@ -1,0 +1,259 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .image-rendering-high-quality {
+    image-rendering: high-quality;
+  }
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer components {
+  [data-rmiz] {
+    @apply block relative;
+  }
+  
+  [data-rmiz-ghost] {
+    @apply pointer-events-none absolute;
+  }
+  
+  [data-rmiz-btn-zoom],
+  [data-rmiz-btn-unzoom] {
+    @apply hidden;
+  }
+  
+  [data-rmiz-modal][open] {
+    @apply fixed inset-0 w-screen h-screen m-0 p-0 overflow-hidden;
+    @apply max-w-none max-h-none bg-transparent;
+  }
+  
+  [data-rmiz-modal-overlay] {
+    @apply absolute inset-0 transition-colors;
+  }
+  
+  [data-rmiz-modal-img] {
+    @apply absolute transform-gpu transition-transform duration-300;
+    transform-origin: 0 0;
+  }
+  
+  [data-rmiz-content="found"] img {
+    @apply cursor-zoom-in;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-rmiz-modal-overlay],
+  [data-rmiz-modal-img] {
+    transition-duration: 0.01ms !important;
+  }
+}
+@layer base {
+  :root {
+    --background: 30 33% 96%; /* Soft cream background */
+    --foreground: 30 10% 23%; /* Deep gray text */
+    --card: 30 33% 98%; /* Slightly lighter card background */
+    --card-foreground: 30 10% 23%; /* Same deep gray for text on cards */
+    --popover: 30 33% 97%; /* Light beige popover */
+    --popover-foreground: 30 10% 23%; /* Consistent text color */
+  
+    --primary: 36 38% 50%; /* Warm gold accent */
+    --primary-foreground: 30 33% 96%; /* Light text on gold buttons */
+  
+    --secondary: 24 22% 75%; /* Soft beige for secondary elements */
+    --secondary-foreground: 30 10% 23%; /* Deep gray text on secondary backgrounds */
+  
+    --muted: 30 20% 85%; /* Subtle muted background */
+    --muted-foreground: 30 10% 45%; /* Mid-gray muted text */
+  
+    --accent: 25 25% 40%; /* Rich brown accent */
+    --accent-foreground: 30 33% 96%; /* Light text for accent elements */
+  
+    --destructive: 0 70% 50%; /* Bold red for warnings */
+    --destructive-foreground: 30 33% 96%; /* Light text on destructive backgrounds */
+  
+    --border: 30 20% 80%; /* Light beige borders */
+    --input: 30 20% 80%; /* Consistent with border for inputs */
+    --ring: 30 10% 23%; /* Dark ring color for focus states */
+  
+    --chart-1: 36 50% 55%; /* Gold tone */
+    --chart-2: 25 30% 40%; /* Brown tone */
+    --chart-3: 45 60% 65%; /* Warm sand tone */
+    --chart-4: 20 35% 30%; /* Darker brown */
+    --chart-5: 10 60% 45%; /* Earthy terracotta */
+  
+    --radius: 1rem; /* Softer rounded corners */
+  }
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+
+.bg-cream-beige {
+  background: linear-gradient(to bottom right, #f7f4f1, #e9e3dd); /* Soft cream to beige */
+}
+
+.bg-gold-brown {
+  background: linear-gradient(to right, #c4a16c, #7a5e47); /* Warm gold to rich brown */
+}
+
+.bg-brown-ivory {
+  background: linear-gradient(to bottom right, #7a5e47, #f7f4f1); /* Rich brown fading to cream */
+}
+.bg-brown-ivory2 {
+  background: linear-gradient(to bottom right, #7a5e47, #f0c8a0); /* Rich brown fading to cream */
+}
+
+.bg-dark-brown-gold {
+  background: linear-gradient(to top right, #3d2e25, #c4a16c); /* Deep brown to gold */
+}
+
+.bg-beige-cream {
+  background: linear-gradient(to top, #e9e3dd, #f7f4f1); /* Subtle beige to soft cream */
+}
+
+.bg-brown-gradient {
+  background: linear-gradient(to left, #7a5e47, #3d2e25); /* Rich to dark brown */
+}
+
+.bg-cream-gold {
+  background: linear-gradient(to left, #f7f4f1, #c4a16c); /* Cream blending into warm gold */
+}
+
+
+
+.gradient-gray {
+  background: linear-gradient(to right, #3a3a3a, #7a5e47); /* Deep gray to rich brown */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+
+.shadow-gold {
+  box-shadow: 0 4px 10px rgba(196, 161, 108, 0.6); /* Warm gold shadow */
+}
+
+.shadow-cream {
+  box-shadow: 0 4px 10px rgba(247, 244, 241, 0.5); /* Soft cream shadow */
+}
+
+.browny {
+  box-shadow: 0 4px 10px rgba(122, 94, 71, 0.5); /* Rich brown shadow */
+}
+
+
+
+.text-gradient-gold {
+  background: linear-gradient(to right, #c4a16c, #3a3a3a); /* Gold to deep gray */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-ivory {
+  background: linear-gradient(to right, #f7f4f1, #e9e3dd); /* Cream to beige */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-brown {
+  background: linear-gradient(to right, #7a5e47, #3d2e25); /* Rich brown to dark brown */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-soft {
+  background: linear-gradient(to right, #e9e3dd, #3a3a3a); /* Soft beige to deep gray */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+
+.imgg{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
+}
+
+.pre-loader p {
+  text-transform: uppercase;
+  font-family: "Timmons NY";
+  line-height: 60px;
+}
+
+.counter {
+  height: 100px;
+  display: flex;
+  font-family: "Timmons NY";
+  font-weight: 400;
+  line-height: 150px;
+  clip-path: polygon(0 0,100% 0,100% 100px,0 100px);
+}
+
+.headerr,.headerr2{
+  transform: translate(-50%,-50%);
+}
+.headerr h1{
+  text-transform: uppercase;
+  font-family: "PP Neue World";
+  clip-path: polygon(0 0,100% 0, 100% 100%, 0 100%);
+  color: #f0c8a0;
+}
+.headerr h1 span{
+  position: relative;
+  top:100px
+}
+
+.tpp{
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}

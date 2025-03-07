@@ -1,0 +1,130 @@
+"use client";
+import React, { useEffect, useState } from "react";
+import { Mail, Phone, MapPin, Linkedin, Github } from "lucide-react";
+import { doc, getDoc } from "firebase/firestore";
+import { useSession } from "next-auth/react";
+import { db } from "@/app/firebase/config";
+
+interface SavedText {
+  title: string;
+  description: string;
+}
+
+interface UserData {
+  savedText?: SavedText[];
+}
+
+const ContactPage = () => {
+
+  const { data: session, status } = useSession();
+  const [userData, setUserData] = useState<UserData | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const userId = session?.user?.id;
+
+  useEffect(() => {
+    if (!userId) return;
+
+    const fetchUserData = async () => {
+      setLoading(true);
+      try {
+        const docRef = doc(db, "retailers", userId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          const data = docSnap.data() as UserData;
+          setUserData(data); // Set state
+          localStorage.setItem("contactData", JSON.stringify(data)); // Save to localStorage
+        } else {
+          console.warn("No user document found.");
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    // 🗄️ Load from localStorage or fetch if not found
+    const storedData = localStorage.getItem("contactData");
+    if (storedData) {
+      setUserData(JSON.parse(storedData));
+    } else {
+      fetchUserData();
+    }
+  }, [userId]);
+
+  // 🕒 Loading state
+  if (status === "loading" || loading) return <p>Loading...</p>;
+  if (!userData) return <p>No user data available.</p>;
+
+  // 🔍 Find text descriptions by title
+  const getText = (title: string) =>
+    userData.savedText?.find((text) => text.title === title)?.description ?? "Not available";
+
+  const email = getText("email");
+  const phone = getText("phone");
+  const location = getText("location");
+  const linkedin = getText("link1");
+  const github = getText("link2");
+
+  return (
+    <div className="max-w-7xl mx-auto  py-16 px-6">
+      <h2 className="text-4xl font-semibold text-center text-[#5c4b36] mb-10">
+        Get in Touch
+      </h2>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        {/* Left Side: Contact Details */}
+        <div className="flex flex-col justify-between bg-[#f3f1ed] rounded-2xl p-8 shadow-md hover:shadow-lg transition">
+          <div>
+            <h3 className="text-2xl font-medium text-[#5c4b36] mb-4">
+              Contact Information
+            </h3>
+            <ul className="space-y-4 text-[#7a5e47]">
+              <li className="flex items-center">
+              <Mail className="mr-3 text-[#c4a16c]" /> {email}
+              </li>
+              <li className="flex items-center">
+              <Phone className="mr-3 text-[#c4a16c]" /> {phone}
+              </li>
+              <li className="flex items-center">
+              <MapPin className="mr-3 text-[#c4a16c]" /> {location}
+              </li>
+            </ul>
+          </div>
+
+          {/* Social Links */}
+          <div className="mt-8">
+            <h4 className="text-lg font-medium text-[#5c4b36] mb-2">
+              Connect with me:
+            </h4>
+            <div className="flex space-x-4">
+            <a
+              href={linkedin !== "Not available" ? linkedin : "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Linkedin className="w-7 h-7 text-[#c4a16c] hover:text-[#a8845b] transition" />
+            </a>
+            <a
+              href={github !== "Not available" ? github : "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Github className="w-7 h-7 text-[#c4a16c] hover:text-[#a8845b] transition" />
+            </a>
+          </div>
+          </div>
+        </div>
+          {/* 📞 Contact */}
+  <section className="text-center flex flex-col items-center justify-center bg-gold-brown text-white py-8 rounded-xl">
+    <h2 className=" text-3xl md:text-4xl font-semibold mb-2">Let&apos;s Work Together</h2>
+    <p className="mb-4">Available for full-time, contract, or freelance work.</p>
+  </section>
+    </div>
+    </div>
+  );
+};
+
+export default ContactPage;
