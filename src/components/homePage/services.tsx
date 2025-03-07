@@ -10,7 +10,6 @@ import gsap from "gsap";
 import {useGSAP} from "@gsap/react";
 import {ScrollTrigger} from "gsap/ScrollTrigger"
 import Link from 'next/link';
-import Image from 'next/image';
 
 interface SavedText {
   title: string;
