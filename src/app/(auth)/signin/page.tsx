@@ -62,7 +62,7 @@ export default function Signin() {
   
           if (session?.user) {
             const retailerId = session.user.id;  // Ensure this ID is correct
-            router.push(`/`); // Redirect to the retailer page
+            router.push(`/home`); // Redirect to the retailer page
   
             if (retailerId) {
               // Fetch admin document from Firebase using the admin ID

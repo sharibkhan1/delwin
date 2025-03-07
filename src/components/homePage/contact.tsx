@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Mail, Phone, MapPin, Linkedin, Github } from "lucide-react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/app/firebase/config";
+import { Skeleton } from "../ui/skeleton";
 
 interface SavedText {
   title: string;
@@ -53,7 +54,9 @@ const ContactPage = () => {
   }, [userId]);
 
   // 🕒 Loading state
-  if (status === "loading" || loading) return <p>Loading...</p>;
+  if (loading) return (
+    <Skeleton className="h-[20rem] w-full bg-dark-brown-gold rounded-xl" />
+  );
   if (!userData) return <p>No user data available.</p>;
 
   // 🔍 Find text descriptions by title

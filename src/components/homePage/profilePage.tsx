@@ -67,7 +67,7 @@ const ProfilePage = () => {
       fetchUserData();
   }, [userId]);
 
-  if (status === "loading" || loading) return  (
+  if (loading) return  (
     <Skeleton className="h-[20rem] w-full bg-dark-brown-gold rounded-xl" />
   )
   if (!userData) return <p>No user data available.</p>;

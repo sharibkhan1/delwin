@@ -142,7 +142,7 @@ const ServicesPage = () => {
     fetchUserData();
   }, [userId]);
 
-  if (status === "loading" || loading) return <p>Loading...</p>;
+  if (loading) return <p>Loading...</p>;
   if (!userData) return <p>No user data available.</p>;
 
   // 🎯 Get the image named "port1" and text with title "portfolio"
