@@ -2,8 +2,8 @@
 import { use, useEffect, useState } from "react";
 import { db } from "@/app/firebase/config";
 import { doc, getDoc } from "firebase/firestore";
-import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ImageZoom } from "@/components/ui/zoomable-image";
 
 type Portfolio = {
   id: string;
@@ -88,7 +88,7 @@ const PortfolioDetail = ({ params }: { params: Promise<{ portfolioid: string }> 
           <h2 className="text-2xl font-semibold text-gray-700">Gallery</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
             {portfolio.images.map((image: string, index: number) => (
-              <Image
+              <ImageZoom
                 key={index}
                 src={image}
                 width={800} // Set a suitable width
@@ -112,7 +112,7 @@ const PortfolioDetail = ({ params }: { params: Promise<{ portfolioid: string }> 
                 <p className="text-gray-600">{material.description}</p>
                 <div className="grid grid-cols-2 gap-2 mt-2">
                   {material.imageUrls?.map((image: string, imgIndex: number) => (
-                    <Image
+                    <ImageZoom
                       key={imgIndex}
                       width={800} // Set a suitable width
                       height={450} 

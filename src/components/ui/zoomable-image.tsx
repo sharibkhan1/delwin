@@ -34,7 +34,7 @@ export function ImageZoom({
       //@ts-expect-error i dont knowww
       classOverlay={cn(
         "absolute inset-0 transition-colors bg-background/80",
-        "cursor-zoom-out" 
+        "cursor-pointer" 
       )}
       closeText="Close" 
       zoomMargin={20}
@@ -44,7 +44,7 @@ export function ImageZoom({
         src: getImageSrc(props.src),
         sizes: undefined,
         className: cn(
-          "image-rendering-high-quality cursor-zoom-out", 
+          "image-rendering-high-quality cursor-pointer", 
           zoomInProps?.className
         ),
         ...zoomInProps,
@@ -53,7 +53,7 @@ export function ImageZoom({
       {children ?? (
         <Image
           className={cn(
-            "cursor-zoom-in rounded-md transition-all",
+            "cursor-pointer rounded-md transition-all",
             className
           )}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 900px"
