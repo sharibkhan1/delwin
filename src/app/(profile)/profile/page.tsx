@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { doc, getDoc } from 'firebase/firestore';
 import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage';
-import { useSession } from 'next-auth/react';
 import { db } from '@/app/firebase/config';
 import { BrandsGrid } from '../_comp/logolist';
 import { brands } from '@/lib/cardse';
@@ -28,11 +27,10 @@ interface ImageData {
 }
 
 const ProfilePage = () => {
-  const { data: session } = useSession();
   const [userData, setUserData] = useState<UserData | null>(null);
   const [images, setImages] = useState<ImageData[]>([]);
 
-  const userId = session?.user.id;
+  const userId = "F4DXnuFmS5XN6RQ69UwddqKfsgE3"
 
   useEffect(() => {
     if (!userId) return;
@@ -176,7 +174,7 @@ const ProfilePage = () => {
   {/* 🗂️ Portfolio Highlights */}
   <section>
     <h2 className="text-5xl text-center font-semibold text-primary mb-6">Portfolio Highlights</h2>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-6">
       {images
         .filter((img) => img.name.startsWith('port-'))
         .map((img) => (

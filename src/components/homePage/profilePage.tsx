@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { doc, getDoc } from "firebase/firestore";
 import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
-import { useSession } from "next-auth/react";
 import { db } from "@/app/firebase/config";
 import { DownloadCloudIcon } from "lucide-react";
 import { Skeleton } from "../ui/skeleton";
@@ -25,12 +24,11 @@ interface SavedText {
   
 const ProfilePage = () => {
 
-    const { data: session, status } = useSession();
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState<UserData | null>(null);
   const [images, setImages] = useState<ImageData[]>([]);
 
-  const userId = session?.user?.id;
+  const userId = "F4DXnuFmS5XN6RQ69UwddqKfsgE3"
 
   // 🔄 Fetch data from Firestore and Storage
   useEffect(() => {
@@ -82,7 +80,7 @@ const ProfilePage = () => {
 
   return (
     <div>
-              <h2 className=" text-5xl md:text-6xl font-bold text-center text-[#5c4b36] mb-10">
+              <h2 className=" text-4xl md:text-5xl font-bold text-center text-[#5c4b36] mb-10">
         Profile Details
       </h2>
          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10 bg-brown-ivory2 rounded-2xl p-8 shadow-lg transition hover:shadow-md shadow-[#a88568]">

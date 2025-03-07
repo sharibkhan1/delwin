@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { Mail, Phone, MapPin, Linkedin, Github } from "lucide-react";
 import { doc, getDoc } from "firebase/firestore";
-import { useSession } from "next-auth/react";
 import { db } from "@/app/firebase/config";
 
 interface SavedText {
@@ -16,11 +15,10 @@ interface UserData {
 
 const ContactPage = () => {
 
-  const { data: session, status } = useSession();
   const [userData, setUserData] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const userId = session?.user?.id;
+  const userId = "F4DXnuFmS5XN6RQ69UwddqKfsgE3"
 
   useEffect(() => {
     if (!userId) return;

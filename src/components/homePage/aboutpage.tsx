@@ -41,7 +41,7 @@ function AboutPage() {
   return (
 <div className="flex flex-col items-center w-full min-h-[400px] px-4">
   {/* Page Title */}
-  <h1 className="tpp text-3xl md:text-5xl font-bold text-center mb-10">
+  <h1 className="tpp text-4xl text-[#5c4b36] md:text-6xl font-bold text-center mb-10">
     About Our Services
   </h1>
 

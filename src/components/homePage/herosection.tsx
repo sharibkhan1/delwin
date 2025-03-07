@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { doc, getDoc } from 'firebase/firestore';
 import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage';
-import { useSession } from 'next-auth/react';
 import { db } from '@/app/firebase/config';
 import { MorphingText } from '../ui/goofytext';
 import { texts } from '@/lib/cardse';
@@ -23,14 +22,12 @@ interface SavedText {
   }
 
 const HeroSection = () => {
-    const { data: session } = useSession();
     const [, setLoading] = useState(false);
   const [userData, setUserData] = useState<UserData | null>(null);
   const [images, setImages] = useState<ImageData[]>([]);
   
-    const userId = session?.user.id
+    const userId = "F4DXnuFmS5XN6RQ69UwddqKfsgE3"
     useEffect(() => {
-        if (!userId) return;
     
         const fetchUserData = async () => {
           setLoading(true);
@@ -76,21 +73,15 @@ const HeroSection = () => {
 
     {/* Upper Section - Text */}
     <div className="flex flex-col  items-center justify-center text-center h-full md:h-[50%] px-6 md:px-20">
-      <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold leading-tight uppercase">
+      <h1 className="text-5xl md:text-7xl font-extrabold leading-tight uppercase">
         {text1 ? text1.description : "FURNITURE & DESIGN SERVICES"}<span>
         <MorphingText texts={texts} />
         </span>
       </h1>
-      <p className="text-lg md:text-xl text-gray-500 mt-4 max-w-[600px]">
+      <p className="md:flex hidden text-lg md:text-xl text-gray-500 mt-4 max-w-[600px]">
         When seeking a combination of interior design for your home, you deserve an exclusive and aesthetic touch.
       </p>
   
-      {/* Buttons */}
-      <div className="mt-6 hidden md:flex gap-4">
-        <button className="px-6 py-3 text-lg font-semibold border border-black text-black rounded-full hover:bg-black hover:text-white transition">
-          EXPLORE
-        </button>
-      </div>
     </div>
   
     {/* Lower Section - Image */}

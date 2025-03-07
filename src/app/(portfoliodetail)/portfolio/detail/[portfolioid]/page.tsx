@@ -2,8 +2,8 @@
 import { use, useEffect, useState } from "react";
 import { db } from "@/app/firebase/config";
 import { doc, getDoc } from "firebase/firestore";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { Skeleton } from "@/components/ui/skeleton";
 
 type Portfolio = {
   id: string;
@@ -19,10 +19,8 @@ type Portfolio = {
 const PortfolioDetail = ({ params }: { params: Promise<{ portfolioid: string }> }) => {
   const [portfolio, setPortfolio] = useState<Portfolio | null>(null);
   const [loading, setLoading] = useState(true);
-
-  const { data: session } = useSession();
   const { portfolioid: portfolioId } = use(params);
-  const userId = session?.user?.id;
+  const userId = "F4DXnuFmS5XN6RQ69UwddqKfsgE3"
 
   useEffect(() => {
     if (!userId || !portfolioId) return;
@@ -53,7 +51,16 @@ const PortfolioDetail = ({ params }: { params: Promise<{ portfolioid: string }> 
   }, [userId,portfolioId]);
 
 
-  if (loading) return <p>Loading portfolio details...</p>;
+  if (loading) return (
+    <div className='px-3'>
+    <Skeleton className='w-full h-[10rem] bg-cream-gold mb-5 ' />
+    <Skeleton className='w-full h-[20rem] bg-cream-gold mb-5' />
+    <Skeleton className='w-full h-[10rem] bg-cream-gold mb-5' />
+    <Skeleton className='w-full h-[20rem] bg-cream-gold mb-5' />
+    <Skeleton className='w-full h-[10rem] bg-cream-gold mb-5' />
+    <Skeleton className='w-full h-[20rem] bg-cream-gold mb-5' />
+    </div>
+  );
   if (!portfolio) return <p>Portfolio not found.</p>;
 
   return (

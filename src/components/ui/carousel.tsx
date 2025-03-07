@@ -68,7 +68,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
     event.currentTarget.style.opacity = "1";
   };
 
-  const { src, title,id } = slide;
+  const { src, title } = slide;
 
   return (
     <div className="[perspective:1200px] [transform-style:preserve-3d]">
@@ -120,9 +120,6 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
         >
           <h2 className="text-lg md:text-2xl lg:text-4xl font-semibold  relative">
             {title}
-          </h2>
-          <h2 className="text-lg md:text-2xl lg:text-4xl font-semibold  relative">
-            {id}
           </h2>
           <div className="flex justify-center">
             <button

@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from 'react';
 import { MoveRightIcon } from "lucide-react";
-import { useSession } from 'next-auth/react';
 import { doc, getDoc } from 'firebase/firestore';
 import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage';
 import { db } from '@/app/firebase/config';
@@ -9,7 +8,8 @@ import { cards } from '@/lib/cardse';
 import gsap from "gsap";
 import {useGSAP} from "@gsap/react";
 import {ScrollTrigger} from "gsap/ScrollTrigger"
-import Link from 'next/link';
+import { Button } from '../ui/button';
+import { useRouter } from 'next/navigation';
 
 interface SavedText {
   title: string;
@@ -35,14 +35,13 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ServicesPage = () => {
 
-  const { data: session, status } = useSession();
-
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState<UserData | null>(null);
   const [, setImages] = useState<ImageData[]>([]);
   const container = useRef<HTMLDivElement | null>(null);
+  const router = useRouter();
 
-  const userId = session?.user?.id;
+  const userId = "F4DXnuFmS5XN6RQ69UwddqKfsgE3"
 
   useEffect(() => {
     const checkContainer = setInterval(() => {
@@ -154,22 +153,28 @@ const ServicesPage = () => {
 
   
   const Card: React.FC<CardProps> = ({ title, copy, index ,link}) => {
+    const handleClick = () => {
+      router.push(link);
+    };
     return(
       <div className='card  relative' id={`card-${index+1}`} >
       <div
         className={`card-inner relative transform w-full h-full p-[2em] flex gap-[4em] ${
-          index % 2 === 0 ? 'bg-yellow-500' : 'bg-gray-300'
+          index % 2 === 0 ? 'bg-secondary' : 'bg-primary-foreground'
         }`}
       >
         <div className='card-content flex-[3]' >
         <div className="flex items-center flex-row md:items-center gap-2 md:gap-4">
         <h1 className='font-bold mb-[2.5em] text-3xl md:text-[4rem] ' >{title}</h1>
-            <Link
-            href={link}
-            className="text-lg md:text-2xl mb-[2.5em] font-semibold flex items-end gap-1 md:gap-2"
+            <Button
+            variant="link"
+            onClick={handleClick}
+            className={`text-lg md:text-2xl mb-[2.5em] font-semibold flex items-end gap-1 md:gap-2 ${
+              index % 2 === 0 ? 'text-[#f7f4f1]' : 'text-[#c4a16c]'
+            }`}
             >
               Explore <MoveRightIcon size={20} />
-            </Link>
+            </Button>
           </div>
             <p className='text-[1.25rem] md:max-w-[35rem] max-w-[30rem] font-semibold ' >{copy}</p>
           </div>
@@ -183,7 +188,7 @@ const ServicesPage = () => {
   return (
     <div className='app' ref={container}>
       <section className='intro relative w-screen h-max py-6 px-2 flex items-center justify-center text-center' >
-      <h1 className='text-center text-7xl font-bold' >My Projects</h1>
+      <h1 className='text-center text-[#5c4b36] text-4xl md:text-6xl  font-bold' >My Projects</h1>
       </section>
       <section className='cards '>
         {cards.map((card,index)=>(

@@ -19,7 +19,7 @@ const Page = ({ params }: { params: Promise<{ id: string }> }) => {
   const { id: userId } = use(params); // ✅ Unwrap params with React.use()
 
   const [userData, setUserData] = useState<{ email?: string; savedText?: { title: string; description: string }[] }>({});
-  const [loading, setLoading] = useState(false);
+  const [, setLoading] = useState(false);
 
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imageName, setImageName] = useState("");
@@ -161,15 +161,18 @@ const Page = ({ params }: { params: Promise<{ id: string }> }) => {
           </div>
         </div>
       </div>  
-    {loading ? (
-      <p>Loading user data...</p>
-    ) : userData.email ? (
-      <div className="bg-gray-100 p-4  rounded-lg shadow-md">
-        <p><strong>Email:</strong> {userData.email ?? "Not available"}</p>
-      </div>
-    ) : (
-      <p>User data not found.</p>
-    )}
+   <div className="bg-white p-3 rounded-lg shadow-md text-sm text-black flex-col shadow-black/35">
+      <p>
+      1. <span className="font-semibold" >home1:</span> herosection image ; <span className="font-semibold" >text1:</span> herosection title
+      </p>
+      <p>      2. <span className="font-semibold">grid1,2,3,4:</span> for mywork section</p>
+      <p>      3. <span className="font-semibold" >person:</span> profile image ; <span className="font-semibold" >name:</span> your name ; <span className="font-semibold" >profilesub:</span> short skills ; <span className="font-semibold" >profiledes:</span> description
+      </p>
+      <p>      4. <span className="font-semibold" >port-1,port-2,.....</span> for profile detail your works images
+      </p>
+      <p>      5.<span className="font-semibold" >email:</span> email ; <span className="font-semibold" >location:</span> address ; <span className="font-semibold" >link1:</span> www.qweqe ; <span className="font-semibold" >link2:</span> www. ; <span className="font-semibold" >phone:</span> 9090989
+      </p>
+   </div>
   
     {/* Row 1: Forms (30%) | Images (70%) */}
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
