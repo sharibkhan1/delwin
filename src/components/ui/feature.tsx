@@ -2,8 +2,6 @@ import { cn } from "@/lib/utils";
 import {
   IconAdjustmentsBolt,
   IconCloud,
-  IconCurrencyDollar,
-  IconEaseInOut,
   IconHeart,
   IconHelp,
   IconRouteAltLeft,
@@ -17,18 +15,6 @@ export function FeaturesSectionWithHoverEffects() {
       description:
         "Built for engineers, developers, dreamers, thinkers and doers.",
       icon: <IconTerminal2 />,
-    },
-    {
-      title: "Ease of use",
-      description:
-        "It's as easy as using an Apple, and as expensive as buying one.",
-      icon: <IconEaseInOut />,
-    },
-    {
-      title: "Pricing like no other",
-      description:
-        "Our prices are best in the market. No cap, no lock, no credit card required.",
-      icon: <IconCurrencyDollar />,
     },
     {
       title: "100% Uptime guarantee",

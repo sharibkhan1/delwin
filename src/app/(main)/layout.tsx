@@ -4,7 +4,7 @@ import React, { ReactNode } from "react";
 const LayoutPage = ({ children }: { children: ReactNode }) => {
 
   return (
-    <div className="w-screen max-h-screen bg-[#e9e3dd] h-full flex flex-col items-center">
+    <div className="w-screen max-h-screen bg-[#dbcec1] h-full flex flex-col items-center">
       {/* Top Bar */}
       <div className="w-full h-[100px] fixed top-0 left-0 z-10 bg-secondary shadow-md">
         <div className="max-w-7xl  mx-auto flex items-center justify-between h-full py-3 px-4">
@@ -20,7 +20,7 @@ const LayoutPage = ({ children }: { children: ReactNode }) => {
       </div>
 
       {/* Content */}
-      <div className="max-w-7xl mt-[40%] md:mt-28 border-2 border-black/80 rounded-2xl relative w-full">
+      <div className="max-w-7xl bg-[#e9e3dd] mt-[40%] md:mt-28 border-2 shadow-lg shadow-black/50 border-black/80 rounded-2xl relative w-full">
           {children}
           </div>
     </div>

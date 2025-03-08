@@ -79,7 +79,7 @@ function AboutPage() {
             </CrossPatternCard>
           ))}
         </div>
-      </div>
+  </div>
     </div>
   );
 }

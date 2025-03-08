@@ -11,14 +11,18 @@ import { Pencil, Plus } from "lucide-react";
 import IconBackadminButton from "@/components/global/iconadminback";
 import DeletePortfolioDialog from "./_comp/deletedialgo";
 
+const FILTER_TYPES = ["ALL", "BEDROOM", "LIVING ROOM", "BATHROOM", "EXTERIOR", "KITCHEN", "COMMERCIAL"];
+
 const PortfolioPage = ({ params }: { params: Promise<{ id: string }> }) => {
   const { data: session } = useSession();
   const userId = session?.user.id;
   const router = useRouter();
   const { id: userIdd } = use(params); // ✅ Unwrap params with React.use()
 
-  const [portfolios, setPortfolios] = useState<{ id: string; name: string; description: string }[]>([]);
+  const [portfolios, setPortfolios] = useState<{ id: string; name: string; type: string }[]>([]);
   const [loading, setLoading] = useState(false);
+  const [filteredPortfolios, setFilteredPortfolios] = useState<{ id: string; name: string; type: string }[]>([]);
+  const [selectedType, setSelectedType] = useState("ALL");
 
   useEffect(() => {
     if (!userId) return;
@@ -28,7 +32,9 @@ const PortfolioPage = ({ params }: { params: Promise<{ id: string }> }) => {
         const docRef = doc(db, "retailers", userId);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-          setPortfolios(docSnap.data().portfolios || []);
+          const portfoliosData = docSnap.data().portfolios || [];
+          setPortfolios(portfoliosData);
+          setFilteredPortfolios(portfoliosData); 
         }
       } catch (error) {
         console.error("Error fetching portfolios:", error);
@@ -38,6 +44,15 @@ const PortfolioPage = ({ params }: { params: Promise<{ id: string }> }) => {
     };
     fetchPortfolios();
   }, [userId]);
+
+    // Handle filtering when type changes
+    useEffect(() => {
+      if (selectedType === "ALL") {
+        setFilteredPortfolios(portfolios);
+      } else {
+        setFilteredPortfolios(portfolios.filter((p) => p.type === selectedType));
+      }
+    }, [selectedType, portfolios]);
 
   const createNewPortfolio = async () => {
     const portfolioId = Date.now().toString();
@@ -67,7 +82,7 @@ const PortfolioPage = ({ params }: { params: Promise<{ id: string }> }) => {
   };
 
   return (
-    <div className="p-4 space-y-8">
+    <div className="p-4 relative space-y-8">
       {/* Top Bar */}
       <div className="w-full h-[100px] absolute top-0 left-0 z-10 bg-secondary shadow-md flex items-center">
         <div className="max-w-7xl w-full mx-auto flex items-center justify-between h-full py-3 px-4">
@@ -79,20 +94,34 @@ const PortfolioPage = ({ params }: { params: Promise<{ id: string }> }) => {
         </div>
       </div>
 
+      {/* Dropdown Filter */}
+      <div className="absolute left-3 top-[100px]">
+        <select
+          className="border p-2 rounded-md text-lg bg-white shadow-md"
+          value={selectedType}
+          onChange={(e) => setSelectedType(e.target.value)}
+        >
+          {FILTER_TYPES.map((type) => (
+            <option key={type} value={type}>
+              {type}
+            </option>
+          ))}
+        </select>
+      </div>
+
       {/* Portfolio List */}
       <div className="h-[100px] w-[1px] relative " >
-
       </div>
       <div className="max-w-7xl relative mx-auto mt-24">
         {loading ? (
           <p>Loading portfolios...</p>
-        ) : portfolios.length > 0 ? (
+        ) : filteredPortfolios.length > 0 ? (
           <div className="space-y-4">
-            {portfolios.map((portfolio) => (
+            {filteredPortfolios.map((portfolio) => (
               <div key={portfolio.id} className="p-4 border rounded-lg flex justify-between items-center">
                 <div>
                   <h2 className="text-xl font-semibold">{portfolio.name}</h2>
-                  <p>{portfolio.description}</p>
+                  <p>{portfolio.type}</p>
                 </div>
                 <div className="flex gap-4">
                   <Button variant="outline" onClick={() => router.push(`/delwin/${userIdd}/admin/port/${portfolio.id}`)}>

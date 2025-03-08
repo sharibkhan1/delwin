@@ -109,7 +109,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
             decoding="sync"
           />
           {current === index && (
-            <div className="absolute inset-0 bg-black/30 transition-all duration-1000" />
+            <div className="absolute inset-0  transition-all duration-1000" />
           )}
         </div>
 
@@ -118,14 +118,14 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
             current === index ? "opacity-100 visible" : "opacity-0 invisible"
           }`}
         >
-          <h2 className="text-lg md:text-2xl lg:text-4xl font-semibold  relative">
+          <h2 className="text-sm cursor-default md:text-xl text-secondary-foreground border-2 border-secondary-foreground shadow-md shadow-black/45 bg-primary-foreground md:px-4 md:py-2 px-2 rounded-sm fixed right-0 top-0 lg:text-2xl font-semibold">
             {title}
           </h2>
           <div className="flex justify-center">
             <button
                           onClick={handleNavigation} // Navigate on button click
-            className="mt-6  px-4 py-2 w-fit mx-auto sm:text-sm text-black bg-white h-12 border border-transparent text-xs flex justify-center items-center rounded-2xl hover:shadow-lg transition duration-200 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
-            Explore Component
+            className="mt-6 px-3 md:px-7 py-2 w-fit  shadow-black/45 mx-auto sm:text-sm text-black hover:bg-gray-200 bg-white md:h-12 border border-transparent text-xs flex justify-center items-center rounded-2xl hover:shadow-lg transition duration-200 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
+            Explore
             </button>
           </div>
         </article>

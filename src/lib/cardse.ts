@@ -32,15 +32,9 @@ export const cards=[
 ]
 
 export const texts = [
-   "Hello",
-   "Morphing",
-   "Text",
-   "Animation",
-   "React",
-   "Component",
-   "Smooth",
-   "Transition",
-   "Engaging",
+   "Create",
+   "Curate",
+   "Complete"
  ];
 
 

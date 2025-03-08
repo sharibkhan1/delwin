@@ -18,11 +18,8 @@ type Portfolio = {
   id: string;
   name: string;
   description: string;
-  description2?: string;
   type: string;
   images: string[];
-  materials: { title: string; description: string; imageUrls: string[] }[];
-  features: string[];
 };
 
 const PortfolioEditor = ({ params }: { params: Promise<{ portfolioid: string }> }) => {
@@ -33,14 +30,10 @@ const PortfolioEditor = ({ params }: { params: Promise<{ portfolioid: string }> 
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [description2, setDescription2] = useState("");
   const [type, setType] = useState("Bedroom"); // Dropdown state
   const [loading, setLoading] = useState(false);
   const [portfolioImages, setPortfolioImages] = useState<File[]>([]);
   const [portfolioImageUrls, setPortfolioImageUrls] = useState<string[]>([]);
-  const [features, setFeatures] = useState<string[]>([]);
-
-  const [materials, setMaterials] = useState<{ title: string; description: string; images: File[]; imageUrls: string[] }[]>([]);
 
   useEffect(() => {
     if (!userId) return;
@@ -56,11 +49,8 @@ const PortfolioEditor = ({ params }: { params: Promise<{ portfolioid: string }> 
                    if (portfolio) {
             setName(portfolio.name);
             setDescription(portfolio.description);
-            setDescription2(portfolio.description2);
             setType(portfolio.type || "Bedroom");
             setPortfolioImageUrls(portfolio.images || []);
-            setMaterials(portfolio.materials || []);
-            setFeatures(portfolio.features || []);
           }
         }
       } catch (error) {
@@ -72,19 +62,6 @@ const PortfolioEditor = ({ params }: { params: Promise<{ portfolioid: string }> 
 
     fetchPortfolio();
   }, [userId, portfolioId]);
-
-  const addFeature = () => {
-    setFeatures([...features, ""]); // Add empty feature input
-  };
-  const updateFeature = (index: number, value: string) => {
-    const updatedFeatures = [...features];
-    updatedFeatures[index] = value;
-    setFeatures(updatedFeatures);
-  };
-  
-  const removeFeature = (index: number) => {
-    setFeatures(features.filter((_, i) => i !== index));
-  };
 
   const uploadImages = async (files: File[], path: string) => {
     const uploadPromises = files.map(async (file) => {
@@ -107,32 +84,26 @@ const PortfolioEditor = ({ params }: { params: Promise<{ portfolioid: string }> 
       const docSnap = await getDoc(docRef);
   
       let existingPortfolios = [];
-      
+      let existingImages: string[] = [];
+
       if (docSnap.exists()) {
-        existingPortfolios = docSnap.data().portfolios || [];
+        const userData = docSnap.data();
+        existingPortfolios = userData.portfolios || [];
+
+        const existingPortfolio = existingPortfolios.find((p: Portfolio) => p.id === portfolioId);
+        if (existingPortfolio) {
+          existingImages = existingPortfolio.images || [];
+        }
       } else {
         await setDoc(docRef, { portfolios: [] });
       }
   
       // ✅ Ensure we only store URLs (not File objects)
-      const uploadedPortfolioImages = portfolioImages.length > 0
-        ? await uploadImages(portfolioImages, `port/${portfolioId}`)
-        : portfolioImageUrls;
-  
-      const uploadedMaterials = await Promise.all(
-        materials.map(async (material) => {
-          const uploadedImages = Array.isArray(material.images) && material.images.length > 0
-            ? await uploadImages(material.images, `port/${portfolioId}/${material.title}`)
-            : material.imageUrls || [];
-  
-          return {
-            title: material.title,
-            description: material.description,
-            imageUrls: uploadedImages,
-          };
-        })
-      );
-  
+    const uploadedPortfolioImages = portfolioImages.length > 0
+      ? await uploadImages(portfolioImages, `port/${portfolioId}`)
+      : [];
+      const finalImageUrls = [...existingImages, ...uploadedPortfolioImages]; // Merge images
+
       // ✅ Check if portfolio already exists
       const portfolioIndex = existingPortfolios.findIndex((p: Portfolio) => p.id === portfolioId);
   
@@ -142,11 +113,8 @@ const PortfolioEditor = ({ params }: { params: Promise<{ portfolioid: string }> 
           id: portfolioId,
           name,
           description,
-          description2,
           type,
-          images: uploadedPortfolioImages,
-          materials: uploadedMaterials,
-          features,
+          images: finalImageUrls,
         };
       } else {
         // ✅ Add new portfolio if not found
@@ -154,11 +122,8 @@ const PortfolioEditor = ({ params }: { params: Promise<{ portfolioid: string }> 
           id: portfolioId,
           name,
           description,
-          description2,
           type,
-          images: uploadedPortfolioImages,
-          materials: uploadedMaterials,
-          features,
+          images: finalImageUrls,
         });
       }
   
@@ -172,26 +137,9 @@ const PortfolioEditor = ({ params }: { params: Promise<{ portfolioid: string }> 
       toast.error("Failed to save portfolio.");
     }
   };
-  
-  
 
-  const addMaterialSection = () => {
-    setMaterials([...materials, { title: "", description: "", images: [], imageUrls: [] }]);
-  };
-
-  const removeMaterialSection = (index: number) => {
-    setMaterials((prev) => prev.filter((_, i) => i !== index));
-  };
   const removePortfolioImage = (index: number) => {
     setPortfolioImageUrls((prev) => prev.filter((_, i) => i !== index));
-  };
-
-  const removeMaterialImage = (materialIndex: number, imageIndex: number) => {
-    setMaterials((prev) => {
-      const updatedMaterials = [...prev];
-      updatedMaterials[materialIndex].imageUrls = updatedMaterials[materialIndex].imageUrls.filter((_, i) => i !== imageIndex);
-      return updatedMaterials;
-    });
   };
 
   return (
@@ -214,10 +162,6 @@ const PortfolioEditor = ({ params }: { params: Promise<{ portfolioid: string }> 
           <div>
             <Label>Description</Label>
             <Textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Portfolio Description" />
-          </div>
-          <div>
-            <Label>Description2</Label>
-            <Textarea value={description2} onChange={(e) => setDescription2(e.target.value)} placeholder="Portfolio Description2" />
           </div>
 
           <div>
@@ -247,59 +191,6 @@ const PortfolioEditor = ({ params }: { params: Promise<{ portfolioid: string }> 
               </div>
             ))}
           </div>
-<div>
-  <Label>Features</Label>
-  {features.map((feature, index) => (
-    <div key={index} className="flex items-center gap-2">
-      <Input
-        value={feature}
-        onChange={(e) => updateFeature(index, e.target.value)}
-        placeholder="Feature description"
-        className="mb-2"
-      />
-      <button onClick={() => removeFeature(index)} className="text-red-500">❌</button>
-    </div>
-  ))}
-  <Button className="ml-2" onClick={addFeature}>+ Add Feature</Button>
-</div>
-
-          {materials.map((material, index) => (
-            <div key={index} className="border p-4 relative rounded-md space-y-2">
-              <Label>Material Title</Label>
-              <button onClick={() => removeMaterialSection(index)} className="absolute right-2 top-2 text-red-500">❌</button>
-              <Input value={material.title} onChange={(e) => {
-                const newMaterials = [...materials];
-                newMaterials[index].title = e.target.value;
-                setMaterials(newMaterials);
-              }} />
-
-              <Label>Description</Label>
-              <Textarea value={material.description} onChange={(e) => {
-                const newMaterials = [...materials];
-                newMaterials[index].description = e.target.value;
-                setMaterials(newMaterials);
-              }} />
-
-              <Label>Upload Material Images</Label>
-              <Input type="file" multiple onChange={(e) => {
-                const newMaterials = [...materials];
-                newMaterials[index].images = Array.from(e.target.files || []);
-                setMaterials(newMaterials);
-              }} />
-
-              <div className="flex gap-2 flex-wrap">
-                {material.imageUrls.map((url, imgIndex) => (
-                  <div key={imgIndex} className="relative">
-                    <Image width={400} // Set a suitable width
-                height={450} src={url} alt="Material" className="w-20 h-20 object-cover rounded-md" />
-                    <button onClick={() => removeMaterialImage(index, imgIndex)} className="absolute top-0 right-0 bg-red-500 text-white rounded-full px-2">❌</button>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-
-          <Button className="mr-2" onClick={addMaterialSection}>+ Add Material</Button>
           <Button className="" onClick={handleSave}>Save Portfolio</Button>
         </div>
       )}

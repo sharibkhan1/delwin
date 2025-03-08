@@ -23,7 +23,7 @@ interface SavedText {
 
 const HeroSection = () => {
     const [, setLoading] = useState(false);
-  const [userData, setUserData] = useState<UserData | null>(null);
+  const [, setUserData] = useState<UserData | null>(null);
   const [images, setImages] = useState<ImageData[]>([]);
   
     const userId = "F4DXnuFmS5XN6RQ69UwddqKfsgE3"
@@ -65,7 +65,7 @@ const HeroSection = () => {
     }, [userId]);
     
       const heroImage = images.find((img) => img.name === 'home1');
-      const text1 = userData?.savedText?.find((text) => text.title === 'text1');
+      // const text1 = userData?.savedText?.find((text) => text.title === 'text1');
       // const text2 = userData?.savedText?.find((text) => text.title === 'text2');
 
   return (
@@ -73,14 +73,20 @@ const HeroSection = () => {
 
     {/* Upper Section - Text */}
     <div className="flex flex-col  items-center justify-center text-center h-full md:h-[50%] px-6 md:px-20">
-      <h1 className="text-5xl md:text-7xl font-extrabold leading-tight uppercase">
-        {text1 ? text1.description : "FURNITURE & DESIGN SERVICES"}<span>
+      <h1 className="text-[24vw]  mt-[-5%] flex-col text-center flex md:text-[15.5vw] font-extrabold uppercase">
+        <span className='text-gradient-brown' >
+        STONE 
+        </span>
+        <span className='text-xl text-gradient-brown md:mt-[-7%] mt-[-5%] font-semibold text-end'>
+          & STRAND
+          </span>
+        <span className='mt-5 md:mt-0 text-[#3a3a3a]'>
         <MorphingText texts={texts} />
         </span>
       </h1>
-      <p className="md:flex hidden text-lg md:text-xl text-gray-500 mt-4 max-w-[600px]">
+      {/* <p className="md:flex hidden text-lg md:text-xl text-gray-500 mt-4 max-w-[600px]">
         When seeking a combination of interior design for your home, you deserve an exclusive and aesthetic touch.
-      </p>
+      </p> */}
   
     </div>
   

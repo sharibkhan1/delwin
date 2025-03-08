@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Textarea } from "@/components/ui/textarea";
 import IconBackButton from "@/components/global/iconback";
-import { ListCheck, X } from "lucide-react";
+import { ListCheck, MessageCircle, X } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -154,23 +154,27 @@ const Page = ({ params }: { params: Promise<{ id: string }> }) => {
           <h1 className="text-4xl font-semibold">Admin Page</h1>
 
           {/* Placeholder for spacing or future actions */}
-          <div className="">
+          <div className="flex ">
             <Link  href="admin/port">
-            <ListCheck size={30} />
+            <ListCheck size={30} className="mr-3 hover:border-2 hover:border-black rounded-none" />
+            </Link>
+            <div className="h-[30px] w-[3px] bg-black" />
+            <Link  href="admin/message">
+            <MessageCircle size={30} className="ml-3 hover:border-2 hover:border-black rounded-none" />
             </Link>
           </div>
         </div>
       </div>  
    <div className="bg-white p-3 rounded-lg shadow-md text-sm text-black flex-col shadow-black/35">
       <p>
-      1. <span className="font-semibold" >home1:</span> herosection image ; <span className="font-semibold" >text1:</span> herosection title
+      1. <span className="font-semibold" >home1:</span> herosection image
       </p>
       <p>      2. <span className="font-semibold">grid1,2,3,4:</span> for mywork section</p>
-      <p>      3. <span className="font-semibold" >person:</span> profile image ; <span className="font-semibold" >name:</span> your name ; <span className="font-semibold" >profilesub:</span> short skills ; <span className="font-semibold" >profiledes:</span> description
-      </p>
-      <p>      4. <span className="font-semibold" >port-1,port-2,.....</span> for profile detail your works images
-      </p>
-      <p>      5.<span className="font-semibold" >email:</span> email ; <span className="font-semibold" >location:</span> address ; <span className="font-semibold" >link1:</span> www.qweqe ; <span className="font-semibold" >link2:</span> www. ; <span className="font-semibold" >phone:</span> 9090989
+      {/* <p>      3. <span className="font-semibold" >person:</span> profile image ; <span className="font-semibold" >name:</span> your name ; <span className="font-semibold" >profilesub:</span> short skills ; <span className="font-semibold" >profiledes:</span> description
+      </p> */}
+      {/* <p>      4. <span className="font-semibold" >port-1,port-2,.....</span> for profile detail your works images
+      </p> */}
+      <p>      3.<span className="font-semibold" >email:</span> email ; <span className="font-semibold" >location:</span> address ; <span className="font-semibold" >link1:</span> www.qweqe ; <span className="font-semibold" >link2:</span> www. ; <span className="font-semibold" >phone:</span> 9090989
       </p>
    </div>
   

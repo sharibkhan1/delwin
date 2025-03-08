@@ -2,7 +2,6 @@ import { LayoutGridDemo } from "@/components/gridimage";
 import { AboutPage } from "@/components/homePage/aboutpage";
 import ContactPage from "@/components/homePage/contact";
 import HeroSection from "@/components/homePage/herosection";
-import ProfilePage from "@/components/homePage/profilePage";
 import ServicesPage from "@/components/homePage/services";
 
 
@@ -22,17 +21,17 @@ export default function Home() {
 
 
        <section
-      className="w-full min-w-[100vw]"
+      className="w-full pb-16 min-w-[100vw]"
     >
      <LayoutGridDemo/>
     </section>
 
 
     
-      <section       id="services"
+      {/* <section       id="services"
  className="w-full relative  py-16 px-6 bg-brown-ivory1">
       <ProfilePage/>
-</section>
+</section> */}
 
       {/* Services Section */}
       {/* <section id="services" className="bg-[#f3f1ed] py-16 px-6 rounded-t-[2rem]">
@@ -57,7 +56,7 @@ export default function Home() {
 
       {/* Services Section */}
       
-      <section
+      <section  id="services"
     >
      <ServicesPage/>
     </section>

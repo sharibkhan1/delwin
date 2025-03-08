@@ -1,9 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Mail, Phone, MapPin, Linkedin, Github } from "lucide-react";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/app/firebase/config";
 import { Skeleton } from "../ui/skeleton";
+import { toast } from "sonner";
 
 interface SavedText {
   title: string;
@@ -18,6 +19,8 @@ const ContactPage = () => {
 
   const [userData, setUserData] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(false);
+  const [form, setForm] = useState({ name: "", email: "", phone: "", description: "" });
+  const [, setMessageSent] = useState(false);
 
   const userId = "F4DXnuFmS5XN6RQ69UwddqKfsgE3"
 
@@ -69,6 +72,31 @@ const ContactPage = () => {
   const linkedin = getText("link1");
   const github = getText("link2");
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.name || !form.email || !form.phone || !form.description) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    try {
+      const docRef = doc(db, "retailers", userId);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const existingMessages = docSnap.data().messages || [];
+        const updatedMessages = [...existingMessages, form];
+
+        await updateDoc(docRef, { messages: updatedMessages });
+        setMessageSent(true);
+        toast.success(" Message sent successfully!")
+        setForm({ name: "", email: "", phone: "", description: "" });
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
+  };
+  
   return (
     <div className="max-w-7xl mx-auto  py-16 px-6">
       <h2 className="text-4xl font-semibold text-center text-[#5c4b36] mb-10">
@@ -79,10 +107,10 @@ const ContactPage = () => {
         {/* Left Side: Contact Details */}
         <div className="flex flex-col justify-between bg-[#f3f1ed] rounded-2xl p-8 shadow-md hover:shadow-lg transition">
           <div>
-            <h3 className="text-2xl font-medium text-[#5c4b36] mb-4">
+            <h3 className="text-2xl font-medium text-[#5c4b36] mb-8">
               Contact Information
             </h3>
-            <ul className="space-y-4 text-[#7a5e47]">
+            <ul className="space-y-5 text-[#7a5e47]">
               <li className="flex items-center">
               <Mail className="mr-3 text-[#c4a16c]" /> {email}
               </li>
@@ -119,10 +147,46 @@ const ContactPage = () => {
           </div>
         </div>
           {/* 📞 Contact */}
-  <section className="text-center flex flex-col items-center justify-center bg-gold-brown text-white py-8 rounded-xl">
-    <h2 className=" text-3xl md:text-4xl font-semibold mb-2">Let&apos;s Work Together</h2>
-    <p className="mb-4">Available for full-time, contract, or freelance work.</p>
-  </section>
+          <div className="bg-[#f3f1ed] rounded-2xl p-8 shadow-md hover:shadow-lg transition">
+          <h3 className="text-2xl font-medium text-[#5c4b36] mb-4">
+            Send a Message
+          </h3>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <input
+              type="text"
+              placeholder="Name"
+              className="w-full p-3 rounded-md border border-[#c4a16c] focus:outline-none focus:ring-2 focus:ring-[#a8845b]"
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              className="w-full p-3 rounded-md border border-[#c4a16c] focus:outline-none focus:ring-2 focus:ring-[#a8845b]"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+            />
+            <input
+              type="tel"
+              placeholder="Phone Number"
+              className="w-full p-3 rounded-md border border-[#c4a16c] focus:outline-none focus:ring-2 focus:ring-[#a8845b]"
+              value={form.phone}
+              onChange={(e) => setForm({ ...form, phone: e.target.value })}
+            />
+            <textarea
+              placeholder="Your Message"
+              className="w-full p-3 rounded-md border border-[#c4a16c] focus:outline-none focus:ring-2 focus:ring-[#a8845b] h-32"
+              value={form.description}
+              onChange={(e) => setForm({ ...form, description: e.target.value })}
+            />
+            <button
+              type="submit"
+              className="w-full bg-[#c4a16c] text-white py-3 rounded-md hover:bg-[#a8845b] transition"
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
     </div>
     </div>
   );

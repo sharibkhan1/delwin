@@ -255,5 +255,65 @@ body {
 
 .tpp{
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
 
+
+
+
+
+.counter{
+  position: absolute;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  clip-path: polygon(0 0, 100% 0,100% 100%, 0% 100%);
+  z-index: 0;
+}
+.counter p {
+  position: relative;
+  display: block;
+  transform: translateY(20px);
+}
+
+.hero{
+  position: absolute;
+  transform: translate(-50% , -50%) scale(0.7);
+  clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+  will-change: transform;
+  z-index: 1;
+}
+
+.overlay{
+  clip-path: polygon(0 100%, 100% 100% , 100% 0, 0 0);
+  z-index: 2;
+}
+.header{
+  clip-path: polygon(0 100%, 100% 100% , 100% 0, 0 0);
+  z-index: 1;
+}
+
+.header h1 {
+  margin: 0;
+  padding: 0;
+}
+
+.header h1 span{
+  position: relative;
+  display: inline-block;
+  transform: translateY(500px);
+}
+.header h2 span{
+  position: relative;
+  display: inline-block;
+  transform: translateY(500px);
+}
+
+.hero-img{
+  position: absolute;
+  bottom: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.hero-img img{
+  transform: scale(2);
 }
