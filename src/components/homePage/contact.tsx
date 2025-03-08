@@ -1,81 +1,21 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Mail, Phone, MapPin, Linkedin, Github } from "lucide-react";
+import React, { useState } from "react";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/app/firebase/config";
-import { Skeleton } from "../ui/skeleton";
 import { toast } from "sonner";
-
-interface SavedText {
-  title: string;
-  description: string;
-}
-
-interface UserData {
-  savedText?: SavedText[];
-}
+import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
 
 const ContactPage = () => {
 
-  const [userData, setUserData] = useState<UserData | null>(null);
-  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", phone: "", description: "" });
-  const [, setMessageSent] = useState(false);
 
   const userId = "F4DXnuFmS5XN6RQ69UwddqKfsgE3"
-
-  useEffect(() => {
-    if (!userId) return;
-
-    const fetchUserData = async () => {
-      setLoading(true);
-      try {
-        const docRef = doc(db, "retailers", userId);
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-          const data = docSnap.data() as UserData;
-          setUserData(data); // Set state
-          localStorage.setItem("contactData", JSON.stringify(data)); // Save to localStorage
-        } else {
-          console.warn("No user document found.");
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    // 🗄️ Load from localStorage or fetch if not found
-    const storedData = localStorage.getItem("contactData");
-    if (storedData) {
-      setUserData(JSON.parse(storedData));
-    } else {
-      fetchUserData();
-    }
-  }, [userId]);
-
-  // 🕒 Loading state
-  if (loading) return (
-    <Skeleton className="h-[20rem] w-full bg-dark-brown-gold rounded-xl" />
-  );
-  if (!userData) return <p>No user data available.</p>;
-
-  // 🔍 Find text descriptions by title
-  const getText = (title: string) =>
-    userData.savedText?.find((text) => text.title === title)?.description ?? "Not available";
-
-  const email = getText("email");
-  const phone = getText("phone");
-  const location = getText("location");
-  const linkedin = getText("link1");
-  const github = getText("link2");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.phone || !form.description) {
-      alert("Please fill in all fields.");
+      toast.error("Please fill in all fields.");
       return;
     }
 
@@ -88,7 +28,6 @@ const ContactPage = () => {
         const updatedMessages = [...existingMessages, form];
 
         await updateDoc(docRef, { messages: updatedMessages });
-        setMessageSent(true);
         toast.success(" Message sent successfully!")
         setForm({ name: "", email: "", phone: "", description: "" });
       }
@@ -98,82 +37,38 @@ const ContactPage = () => {
   };
   
   return (
-    <div className="max-w-7xl mx-auto  py-16 px-6">
-      <h2 className="text-4xl volkhov-bold font-semibold text-center text-[#5c4b36] mb-10">
-        Get in Touch
+    <div className="max-w-7xl   py-16 px-6">
+      <h2 className="volkhov-bold  text-5xl md:text-6xl font-bold text-center text-[#5c4b36] mb-10">
+        Contact Us?
       </h2>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-        {/* Left Side: Contact Details */}
-        <div className="flex flex-col justify-between bg-[#f3f1ed] rounded-2xl p-8 shadow-md hover:shadow-lg transition">
-          <div>
-            <h3 className="text-2xl font-medium text-[#5c4b36] mb-8">
-              Contact Information
-            </h3>
-            <ul className="space-y-5 text-[#7a5e47]">
-              <li className="flex items-center">
-              <Mail className="mr-3 text-[#c4a16c]" /> {email}
-              </li>
-              <li className="flex items-center">
-              <Phone className="mr-3 text-[#c4a16c]" /> {phone}
-              </li>
-              <li className="flex items-center">
-              <MapPin className="mr-3 text-[#c4a16c]" /> {location}
-              </li>
-            </ul>
-          </div>
-
-          {/* Social Links */}
-          <div className="mt-8">
-            <h4 className="text-lg font-medium text-[#5c4b36] mb-2">
-              Connect with me:
-            </h4>
-            <div className="flex space-x-4">
-            <a
-              href={linkedin !== "Not available" ? linkedin : "#"}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Linkedin className="w-7 h-7 text-[#c4a16c] hover:text-[#a8845b] transition" />
-            </a>
-            <a
-              href={github !== "Not available" ? github : "#"}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Github className="w-7 h-7 text-[#c4a16c] hover:text-[#a8845b] transition" />
-            </a>
-          </div>
-          </div>
-        </div>
           {/* 📞 Contact */}
-          <div className="bg-[#f3f1ed] rounded-2xl p-8 shadow-md hover:shadow-lg transition">
+          <div className="w-[80vw] max-w-[330px] sm:max-w-3xl mx-auto bg-[#f3f1ed] rounded-2xl p-6 sm:p-10 shadow-md hover:shadow-lg transition">
           <h3 className="text-2xl font-medium text-[#5c4b36] mb-4">
             Send a Message
           </h3>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <input
+          <form onSubmit={handleSubmit} className="space-y-4 z-30">
+            <Input
               type="text"
               placeholder="Name"
               className="w-full p-3 rounded-md border border-[#c4a16c] focus:outline-none focus:ring-2 focus:ring-[#a8845b]"
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
             />
-            <input
+            <Input
               type="email"
               placeholder="Email"
               className="w-full p-3 rounded-md border border-[#c4a16c] focus:outline-none focus:ring-2 focus:ring-[#a8845b]"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
             />
-            <input
+            <Input
               type="tel"
               placeholder="Phone Number"
               className="w-full p-3 rounded-md border border-[#c4a16c] focus:outline-none focus:ring-2 focus:ring-[#a8845b]"
               value={form.phone}
               onChange={(e) => setForm({ ...form, phone: e.target.value })}
             />
-            <textarea
+            <Textarea
               placeholder="Your Message"
               className="w-full p-3 rounded-md border border-[#c4a16c] focus:outline-none focus:ring-2 focus:ring-[#a8845b] h-32"
               value={form.description}
@@ -187,7 +82,6 @@ const ContactPage = () => {
             </button>
           </form>
         </div>
-    </div>
     </div>
   );
 };

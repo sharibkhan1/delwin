@@ -159,7 +159,7 @@ const ServicesPage = () => {
     return(
       <div className='card  relative' id={`card-${index+1}`} >
       <div
-        className={`card-inner relative transform w-full h-full p-[2em] flex gap-[4em] ${
+        className={`card-inner relative transform w-screen h-full p-[2em] flex gap-[4em] ${
           index % 2 === 0 ? 'bg-secondary' : 'bg-primary-foreground'
         }`}
       >
