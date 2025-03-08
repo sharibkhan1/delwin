@@ -99,7 +99,7 @@ const ContactPage = () => {
   
   return (
     <div className="max-w-7xl mx-auto  py-16 px-6">
-      <h2 className="text-4xl font-semibold text-center text-[#5c4b36] mb-10">
+      <h2 className="text-4xl volkhov-bold font-semibold text-center text-[#5c4b36] mb-10">
         Get in Touch
       </h2>
 

@@ -253,12 +253,13 @@ body {
   top:100px
 }
 
-.tpp{
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+
+.volkhov-bold {
+  font-family: "Volkhov", serif;
+  font-weight: 700;
+  font-style: normal;
 }
-
-
-
 
 
 .counter{

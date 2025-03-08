@@ -12,7 +12,7 @@ const LayoutPage = ({ children }: { children: ReactNode }) => {
           
           <IconBackButton/>
           {/* Page Title */}
-          <h1 className=" text-3xl md:text-4xl font-semibold">Portfolio Details</h1>
+          <h1 className=" text-3xl md:text-4xl  font-semibold">Projects Details</h1>
 
           {/* Placeholder for spacing or future actions */}
           <div className=" w-0 md:w-10" />
