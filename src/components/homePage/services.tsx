@@ -188,7 +188,7 @@ const ServicesPage = () => {
   return (
     <div className='app' ref={container}>
       <section className='intro relative w-screen h-max py-6 px-2 flex items-center justify-center text-center' >
-      <h1 className='text-center volkhov-bold  text-[#5c4b36] text-4xl md:text-6xl  font-bold' >My Projects</h1>
+      <h1 className='text-center volkhov-bold  text-[#5c4b36] text-4xl md:text-6xl  font-bold' >Projects</h1>
       </section>
       <section className='cards '>
         {cards.map((card,index)=>(
