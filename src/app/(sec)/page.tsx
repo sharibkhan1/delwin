@@ -138,24 +138,26 @@ const Page = () => {
   }, [router]);
 
   return (
-    <div className='container w-screen h-screen overflow-hidden' >
-      <div className="counter top-[50%] left-[50%] text-xl font-semibold w-[40px] h-[20px] ">
-      <p ref={counterRef}>{counter}</p>
-      </div>
+<div className='container w-screen h-screen overflow-hidden' >
+  <div className="counter top-[50%] left-[50%] text-xl font-semibold w-[40px] h-[20px] ">
+    <p ref={counterRef}>{counter}</p>
+  </div>
 
-      <section className='hero top-[50%] left-[50%] w-screen h-screen ' >
-        <div className="overlay top-0 left-0 w-full bg-gray-700 h-full absolute "></div>
+  <section className='hero top-[50%] left-[50%] w-screen h-screen ' >
+    <div className="overlay top-0 left-0 w-full bg-gray-700 h-full absolute "></div>
 
-        <div className="header flex w-screen flex-col items-center text-center font-extrabold uppercase absolute top-[30%] md:top-[30%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          <h1 className=" text-[24vw] md:text-[15.5vw] leading-tight">STONE </h1>
-          <h2 className="text-xl ml-[40%] md:text-2xl font-semibold mt-[-120px] md:mt-[-20px]">& STRAND</h2>
-          </div>
-
-        <div className="hero-img w-full h-[40vh] p-4 md:px-10 md:h-[50%] ">
-          <img className='w-full h-full object-cover rounded-b-[2rem]' src='/d1.jpg' alt='' />
-        </div>
-      </section>
+    {/* Centered Header */}
+    <div className="header flex w-screen flex-col items-center text-center font-extrabold uppercase absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+      <h1 className="text-[24vw] md:text-[15.5vw] leading-none">STONE</h1>
+      <h2 className="text-xl ml-[50%] md:text-2xl font-semibold">& STRAND</h2>
     </div>
+
+    <div className="hero-img w-full h-[40vh] p-4 md:px-10 md:h-[50%] ">
+      <img className='w-full h-full object-cover rounded-b-[2rem]' src='/d1.jpg' alt='' />
+    </div>
+  </section>
+</div>
+
   );
 }
 
