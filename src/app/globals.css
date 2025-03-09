@@ -126,7 +126,7 @@ body {
 
 
 .bg-cream-beige {
-  background: linear-gradient(to bottom right, #f7f4f1, #e9e3dd); /* Soft cream to beige */
+  background: linear-gradient(to bottom right, #f5e0ca, #e9e3dd); /* Soft cream to beige */
 }
 
 .bg-gold-brown {
@@ -321,7 +321,7 @@ body {
 }
 
 
-svg path {
+.svggg path {
   fill: transparent;
   stroke: #3a3a3a;
   stroke-width:0.7;
