@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger, CustomEase } from "gsap/all"; // ✅ Import CustomEase
 import { useRouter } from "next/navigation";
+import SvgIcon from "@/components/logosvg";
 
 gsap.registerPlugin(ScrollTrigger);
 CustomEase.create(
@@ -139,7 +140,10 @@ const Page = () => {
 
   return (
 <div className='container w-screen h-screen overflow-hidden' >
-  <div className="counter top-[50%] left-[50%] text-xl font-semibold w-[40px] h-[20px] ">
+  {/* <div className="counter top-[50%] left-[50%] text-xl font-semibold w-[40px] h-[20px] "> */}
+  <div className="absolute top-[35%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center">
+
+    <div><SvgIcon/></div>
     <p ref={counterRef}>{counter}</p>
   </div>
 

@@ -319,3 +319,31 @@ body {
 .hero-img img{
   transform: scale(2);
 }
+
+
+svg path {
+  fill: transparent;
+  stroke: #3a3a3a;
+  stroke-width:0.7;
+  stroke-dasharray: 850;
+  stroke-dashoffset: 850;
+  opacity: 1;
+  animation: textAnimation 6s ease-in-out 1 forwards;
+}
+
+@keyframes textAnimation {
+  0% {
+    stroke-dashoffset: 850;
+  }
+  60% {
+    fill: transparent;
+  }
+  80% {
+    stroke-dashoffset: 0;
+    fill:#3a3a3a;
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
