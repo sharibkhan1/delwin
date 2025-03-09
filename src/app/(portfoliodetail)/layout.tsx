@@ -12,7 +12,7 @@ const LayoutPage = ({ children }: { children: ReactNode }) => {
           
           <IconBackadminButton/>
           {/* Page Title */}
-          <h1 className="text-3xl md:text-4xl font-semibold">Portfolio Details</h1>
+          <h1 className="text-3xl md:text-4xl font-semibold">Project Detail</h1>
 
           {/* Placeholder for spacing or future actions */}
           <div className=" w-0 md:w-10" />
@@ -20,7 +20,7 @@ const LayoutPage = ({ children }: { children: ReactNode }) => {
       </div>
 
       {/* Content */}
-      <div className=" mt-[40%] md:mt-28 relative w-full">
+      <div className=" mt-[40%] md:mt-28 relative max-w-7xl w-full">
       <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[60vw] h-[50vh] md:w-[70vw] md:h-[70vh] bg-gradient-to-t from-[#3d2e25] via-[#7a5e47] to-[#f7f4f1] rounded-full blur-3xl opacity-70"></div>
 
           {children}

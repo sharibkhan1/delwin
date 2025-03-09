@@ -7,8 +7,8 @@ import { CrossPatternCard, CrossPatternCardBody } from "../ui/card-with-cross-pa
 const defaultCards = [
   {
     icon: <Sparkles className="size-4 text-blue-300" />,
-    title: "Featured",
-    description: "Discover amazing content",
+    title: "Personalized Approach",
+    description: " Every project is tailored to your unique style",
     date: "Just now",
     iconClassName: "text-blue-500",
     titleClassName: "text-blue-500",
@@ -17,8 +17,8 @@ const defaultCards = [
   },
   {
     icon: <Sparkles className="size-4 text-blue-300" />,
-    title: "Popular",
-    description: "Trending this week",
+    title: "Attention to Detail",
+    description: "From big ideas to small touches, we ensure every element is thoughtfully crafted.",
     date: "2 days ago",
     iconClassName: "text-blue-500",
     titleClassName: "text-blue-500",
@@ -27,8 +27,8 @@ const defaultCards = [
   },
   {
     icon: <Sparkles className="size-4 text-blue-300" />,
-    title: "New",
-    description: "Latest updates and features",
+    title: "Seamless Process",
+    description: "We handle everything to completion making your design journey smooth and stress-free",
     date: "Today",
     iconClassName: "text-blue-500",
     titleClassName: "text-blue-500",
@@ -42,18 +42,19 @@ function AboutPage() {
 <div className="flex flex-col items-center w-full min-h-[400px] px-4">
   {/* Page Title */}
   <h1 className="tpp text-4xl volkhov-bold  text-[#5c4b36] md:text-6xl font-bold text-center mb-10">
-    About Our Services
+    About <span className="text-[#c4a16c]">Our</span>  Services
   </h1>
 
-  <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-10">
+  <div className="w-full  max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-10">
     {/* Left Side - Text Section */}
-    <div className="flex flex-col justify-center px-4 md:px-8">
-      <h2 className="text-2xl md:text-4xl font-semibold mb-4">
-        Why Choose Us?
+    <div className="flex h-[17rem] flex-col p-4 bg-gold-brown rounded-lg  justify-around px-4 md:px-8">
+      <h2 className="text-2xl text-primary-foreground md:text-4xl font-semibold">
+        Why <span className="text-secondary-foreground">Choose</span> Us?
       </h2>
-      <p className="text-primary text-lg md:text-xl">
-        We offer high-quality services tailored to your needs. Our expertise
-        ensures that you get the best results with precision and creativity.
+      <p className="text-primary-foreground text-sm md:text-lg">
+      At Stone & Strand, we craft spaces that blend timeless design with modern living. Our name reflects our approach Stone for solid foundations, Strand for the finer details.
+
+We work closely with our clients to transform homes and businesses into personalized, functional spaces that inspire.
       </p>
     </div>
 

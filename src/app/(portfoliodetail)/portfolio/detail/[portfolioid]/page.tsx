@@ -59,8 +59,11 @@ const PortfolioDetail = ({ params }: { params: Promise<{ portfolioid: string }> 
   return (
     <div className=" p-6">
       {/* Header Section */}
-      <h1 className="text-4xl volkhov-bold  md:text-6xl font-bold text-foreground">{portfolio.name}</h1>
-      <p className="text-lg text-gray-600 mt-2">{portfolio.description}</p>
+      <div className="bg-secondary p-4 rounded-lg" >
+      <h1 className="text-4xl volkhov-bold  md:text-6xl font-bold text-secondary-foreground">{portfolio.name}</h1>
+      <p className="text-lg max-w-6xl text-pr mt-2">{portfolio.description}</p>
+
+      </div>
 
       {/* Image Gallery */}
       {portfolio.images?.length > 0 && (

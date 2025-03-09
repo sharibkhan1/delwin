@@ -118,7 +118,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
             current === index ? "opacity-100 visible" : "opacity-0 invisible"
           }`}
         >
-          <h2 className="text-sm cursor-default md:text-xl text-secondary-foreground border-2 border-secondary-foreground shadow-md shadow-black/45 bg-primary-foreground md:px-4 md:py-2 px-2 rounded-sm fixed right-0 top-0 lg:text-2xl font-semibold">
+          <h2 className="text-sm cursor-default md:text-lg text-primary border-secondary-foreground shadow-md shadow-black/45 bg-primary-foreground md:px-4 md:py-2 px-2 rounded-sm fixed right-0 top-0 lg:text-xl font-semibold">
             {title}
           </h2>
           <div className="flex justify-center">

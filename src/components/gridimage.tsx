@@ -65,7 +65,7 @@ export function LayoutGridDemo() {
   return (
     <div className="h-screen w-full">
        <h2 className="volkhov-bold  text-5xl md:text-6xl font-bold text-center text-[#5c4b36]">
-       Glimpse of Our Work
+       Glimpse <span className="text-[#c4a16c]">of Our</span> Work
       </h2>
       <LayoutGrid cards={cards} />
     </div>

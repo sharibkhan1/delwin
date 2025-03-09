@@ -64,7 +64,7 @@ fetchUserData();
   return (
     <div className="max-w-7xl mx-auto  py-16 px-6">
       <h2 className="text-4xl volkhov-bold font-semibold text-center text-[#5c4b36] mb-10">
-        Get in Touch
+        Get <span className="text-primary">in Touch</span>
       </h2>
 
         {/* Left Side: Contact Details */}
