@@ -290,6 +290,7 @@ body {
 .header{
   clip-path: polygon(0 100%, 100% 100% , 100% 0, 0 0);
   z-index: 1;
+  text-align: center;
 }
 
 .header h1 {

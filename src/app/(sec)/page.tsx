@@ -82,9 +82,9 @@ const Page = () => {
         ease:"hop",
         onStart: () => {
           const tl = gsap.timeline({
-            onComplete: () => {
-              router.replace("/home");
-            },
+            // onComplete: () => {
+            //   router.replace("/home");
+            // },
           });
         
           tl.to(".hero", {
@@ -146,10 +146,10 @@ const Page = () => {
       <section className='hero top-[50%] left-[50%] w-screen h-screen ' >
         <div className="overlay top-0 left-0 w-full bg-gray-700 h-full absolute "></div>
 
-        <div className="header flex  flex-col items-center  font-extrabold uppercase absolute w-full top-[20%] md:top-[4%] lg:top-[-5%] left-[4%] ">
-          <h1 className=" text-[24vw] md:text-[15.5vw]">STONE </h1>
-          <h2 className="text-xl ml-[40%] md:mt-[-3%] mt-[-39%] font-semibold text-end" >& STRAND </h2>
-        </div>
+        <div className="header flex w-screen flex-col items-center text-center font-extrabold uppercase absolute top-[30%] md:top-[30%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <h1 className=" text-[24vw] md:text-[15.5vw] leading-tight">STONE </h1>
+          <h2 className="text-xl ml-[40%] md:text-2xl font-semibold mt-[-120px] md:mt-[-20px]">& STRAND</h2>
+          </div>
 
         <div className="hero-img w-full h-[40vh] p-4 md:px-10 md:h-[50%] ">
           <img className='w-full h-full object-cover rounded-b-[2rem]' src='/d1.jpg' alt='' />
