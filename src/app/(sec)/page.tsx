@@ -147,7 +147,7 @@ const Page = () => {
     <div className="overlay top-0 left-0 w-full bg-gray-700 h-full absolute "></div>
 
     {/* Centered Header */}
-    <div className="header flex w-screen flex-col items-center text-center font-extrabold uppercase absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+    <div className="header flex w-screen flex-col items-center text-center font-extrabold uppercase absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
       <h1 className="text-[24vw] md:text-[15.5vw] leading-none">STONE</h1>
       <h2 className="text-xl ml-[50%] md:text-2xl font-semibold">& STRAND</h2>
     </div>
