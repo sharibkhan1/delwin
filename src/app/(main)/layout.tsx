@@ -20,7 +20,7 @@ const LayoutPage = ({ children }: { children: ReactNode }) => {
       </div>
 
       {/* Content */}
-      <div className="max-w-7xl bg-background/80 mt-[40%] md:mt-28 border-2 shadow-lg shadow-black/50 border-black/80 rounded-2xl relative w-full">
+      <div className="max-w-7xl bg-primary/70 mt-[40%] md:mt-28 border-2 shadow-lg shadow-black/50 border-black/80 rounded-2xl relative w-full">
           {children}
           </div>
     </div>

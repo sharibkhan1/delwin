@@ -1,9 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Mail, Phone, MapPin, Linkedin, Github } from "lucide-react";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/app/firebase/config";
 import { Skeleton } from "../ui/skeleton";
+import { toast } from "sonner";
 
 interface SavedText {
   title: string;
@@ -14,10 +15,12 @@ interface UserData {
   savedText?: SavedText[];
 }
 
-const ContactPage2 = () => {
+const ContactPage = () => {
 
   const [userData, setUserData] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(false);
+  const [form, setForm] = useState({ name: "", email: "", phone: "", description: "" });
+  const [, setMessageSent] = useState(false);
 
   const userId = "F4DXnuFmS5XN6RQ69UwddqKfsgE3"
 
@@ -33,6 +36,7 @@ const ContactPage2 = () => {
         if (docSnap.exists()) {
           const data = docSnap.data() as UserData;
           setUserData(data); // Set state
+          localStorage.setItem("contactData", JSON.stringify(data)); // Save to localStorage
         } else {
           console.warn("No user document found.");
         }
@@ -42,7 +46,14 @@ const ContactPage2 = () => {
         setLoading(false);
       }
     };
-fetchUserData();
+
+    // 🗄️ Load from localStorage or fetch if not found
+    const storedData = localStorage.getItem("contactData");
+    if (storedData) {
+      setUserData(JSON.parse(storedData));
+    } else {
+      fetchUserData();
+    }
   }, [userId]);
 
   // 🕒 Loading state
@@ -60,35 +71,61 @@ fetchUserData();
   const location = getText("location");
   const linkedin = getText("link1");
   const github = getText("link2");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.name || !form.email || !form.phone || !form.description) {
+      toast.error("Please fill in all fields.");
+      return;
+    }
+
+    try {
+      const docRef = doc(db, "retailers", userId);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const existingMessages = docSnap.data().messages || [];
+        const updatedMessages = [...existingMessages, form];
+
+        await updateDoc(docRef, { messages: updatedMessages });
+        setMessageSent(true);
+        toast.success(" Message sent successfully!")
+        setForm({ name: "", email: "", phone: "", description: "" });
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
+  };
   
   return (
     <div className="max-w-7xl mx-auto  py-16 px-6">
-      <h2 className="text-4xl volkhov-bold font-semibold text-center text-foreground mb-10">
+      <h2 className="text-4xl font-semibold text-center text-foreground mb-10">
         Get <span className="text-primary/70">in Touch</span>
       </h2>
 
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {/* Left Side: Contact Details */}
-        <div className="flex flex-col md:flex-row justify-around  bg-background rounded-2xl p-8 shadow-md hover:shadow-lg transition">
+        <div className="flex flex-col justify-between bg-primary rounded-2xl p-8 shadow-md hover:shadow-lg transition">
           <div>
-            <h3 className="text-2xl font-medium text-accent mb-8">
+            <h3 className="text-2xl font-medium text-primary-foreground mb-8">
               Contact Information
             </h3>
-            <ul className="space-y-5 text-secondary-foreground">
+            <ul className="space-y-5 text-secondary">
               <li className="flex items-center">
-              <Mail className="mr-3 text-primary" /> {email}
+              <Mail className="mr-3 text-accent-foreground" /> {email}
               </li>
               <li className="flex items-center">
-              <Phone className="mr-3 text-primary" /> {phone}
+              <Phone className="mr-3 text-accent-foreground" /> {phone}
               </li>
               <li className="flex items-center">
-              <MapPin className="mr-3 text-primary" /> {location}
+              <MapPin className="mr-3 text-accent-foreground" /> {location}
               </li>
             </ul>
           </div>
 
           {/* Social Links */}
           <div className="mt-8">
-            <h4 className="text-lg font-medium text-accent mb-2">
+            <h4 className="text-lg font-medium text-accent-foreground mb-2">
               Connect with me:
             </h4>
             <div className="flex space-x-4">
@@ -97,20 +134,62 @@ fetchUserData();
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Linkedin className="w-7 h-7 text-primary hover:text-accent transition" />
+              <Linkedin className="w-7 h-7 text-secondary hover:text-[#a8845b] transition" />
             </a>
             <a
               href={github !== "Not available" ? github : "#"}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Github className="w-7 h-7 text-primary hover:text-accent transition" />
+              <Github className="w-7 h-7 text-secondary hover:text-[#a8845b] transition" />
             </a>
           </div>
           </div>
         </div>
+          {/* 📞 Contact */}
+          <div className="bg-[#f3f1ed] rounded-2xl p-8 shadow-md hover:shadow-lg transition">
+          <h3 className="text-2xl font-medium text-[#5c4b36] mb-4">
+            Send a Message
+          </h3>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <input
+              type="text"
+              placeholder="Name"
+              className="w-full p-3 rounded-md border border-border focus:outline-none focus:ring-2 focus:ring-[#a8845b]"
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              className="w-full p-3 rounded-md border border-border focus:outline-none focus:ring-2 focus:ring-[#a8845b]"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+            />
+            <input
+              type="tel"
+              placeholder="Phone Number"
+              className="w-full p-3 rounded-md border border-border focus:outline-none focus:ring-2 focus:ring-[#a8845b]"
+              value={form.phone}
+              onChange={(e) => setForm({ ...form, phone: e.target.value })}
+            />
+            <textarea
+              placeholder="Your Message"
+              className="w-full p-3 rounded-md border border-border focus:outline-none focus:ring-2 focus:ring-[#a8845b] h-32"
+              value={form.description}
+              onChange={(e) => setForm({ ...form, description: e.target.value })}
+            />
+            <button
+              type="submit"
+              className="w-full bg-secondary-foreground text-white py-3 rounded-md hover:bg-primary transition"
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
+    </div>
     </div>
   );
 };
 
-export default ContactPage2;
+export default ContactPage;

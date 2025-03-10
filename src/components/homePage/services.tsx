@@ -157,9 +157,9 @@ const ServicesPage = () => {
       router.push(link);
     };
     return(
-      <div className='card  relative' id={`card-${index+1}`} >
+      <div className='card  pointer-events-none relative' id={`card-${index+1}`} >
       <div
-        className={`card-inner relative transform w-screen h-full p-[2em] flex gap-[4em] ${
+        className={`card-inner  relative transform w-screen h-full p-[2em] flex gap-[4em] ${
           index % 2 === 0 ? 'bg-secondary' : 'bg-primary-foreground'
         }`}
       >
@@ -169,7 +169,7 @@ const ServicesPage = () => {
             <Button
             variant="link"
             onClick={handleClick}
-            className={`text-lg md:text-2xl mb-[2.5em] font-semibold flex items-end gap-1 md:gap-2 ${
+            className={`text-lg md:text-2xl mb-[2.5em] pointer-events-auto font-semibold flex items-end gap-1 md:gap-2 ${
               index % 2 === 0 ? 'text-background' : 'text-secondary'
             }`}
             >
@@ -187,7 +187,7 @@ const ServicesPage = () => {
   }
   return (
     <div className='app' ref={container}>
-      <section className='intro relative w-screen h-max py-6 px-2 flex items-center justify-center text-center' >
+      <section className='intro relative w-screen  pointer-events-none h-max py-6 px-2 flex items-center justify-center text-center' >
       <h1 className='text-center volkhov-bold  text-accent text-4xl md:text-6xl  font-bold' >Projects</h1>
       </section>
       <section className='cards '>
