@@ -13,7 +13,7 @@ const AuthLayout=({
             <h2 className='text-gravel md:text-8xl font-bold text-white ' >
                 Join Us
             </h2>
-            <p className="text-[#8FA1B3] dark:text-white/60 md:text-xl mb-10">
+            <p className="text-gradient-brown md:text-xl mb-10">
             Empower yourself with personalized RAG insights tailored just for you on our GenAI platform. ....{' '}
           <br />
            Unlock the knowledge you need to make informed decisions and stay ahead effortlessly! 😉

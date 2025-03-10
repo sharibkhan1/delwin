@@ -1,6 +1,5 @@
 import { LayoutGridDemo } from "@/components/gridimage";
 import { AboutPage } from "@/components/homePage/aboutpage";
-import ContactPage from "@/components/homePage/contact";
 import ContactPage2 from "@/components/homePage/contact2";
 import HeroSection from "@/components/homePage/herosection";
 import ServicesPage from "@/components/homePage/services";
@@ -8,10 +7,10 @@ import ServicesPage from "@/components/homePage/services";
 export default function Home() {
 
   return (
-    <div className="relative flex flex-col justify-center items-center bg-[#f9f8f4] text-[#3a3a3a] font-sans">
+    <div className="relative flex flex-col justify-center items-center bg-background font-sans">
       {/* Hero Section */}
       <div id="home" className="relative ">
-      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[60vw] h-[50vh] md:w-[70vw] md:h-[70vh] bg-gradient-to-t from-[#3d2e25] via-[#7a5e47] to-[#f7f4f1] rounded-full blur-3xl opacity-70"></div>
+      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[60vw] h-[50vh] md:w-[70vw] md:h-[70vh] bg-grad rounded-full blur-3xl opacity-70"></div>
         <HeroSection/>
       </div>
       {/* Who We Are Section */}
@@ -25,11 +24,11 @@ export default function Home() {
     >
      <LayoutGridDemo/>
     </section>
-    <section
+    {/* <section
       className=" flex items-center justify-center w-screen "
     >
      <ContactPage/>
-    </section>
+    </section> */}
       {/* Services Section */}
       
       <section  id="services"

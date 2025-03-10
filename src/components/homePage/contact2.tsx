@@ -63,32 +63,32 @@ fetchUserData();
   
   return (
     <div className="max-w-7xl mx-auto  py-16 px-6">
-      <h2 className="text-4xl volkhov-bold font-semibold text-center text-[#5c4b36] mb-10">
-        Get <span className="text-primary">in Touch</span>
+      <h2 className="text-4xl volkhov-bold font-semibold text-center text-foreground mb-10">
+        Get <span className="text-primary/70">in Touch</span>
       </h2>
 
         {/* Left Side: Contact Details */}
-        <div className="flex flex-col md:flex-row justify-around  bg-[#f3f1ed] rounded-2xl p-8 shadow-md hover:shadow-lg transition">
+        <div className="flex flex-col md:flex-row justify-around  bg-background rounded-2xl p-8 shadow-md hover:shadow-lg transition">
           <div>
-            <h3 className="text-2xl font-medium text-[#5c4b36] mb-8">
+            <h3 className="text-2xl font-medium text-accent mb-8">
               Contact Information
             </h3>
-            <ul className="space-y-5 text-[#7a5e47]">
+            <ul className="space-y-5 text-secondary-foreground">
               <li className="flex items-center">
-              <Mail className="mr-3 text-[#c4a16c]" /> {email}
+              <Mail className="mr-3 text-primary" /> {email}
               </li>
               <li className="flex items-center">
-              <Phone className="mr-3 text-[#c4a16c]" /> {phone}
+              <Phone className="mr-3 text-primary" /> {phone}
               </li>
               <li className="flex items-center">
-              <MapPin className="mr-3 text-[#c4a16c]" /> {location}
+              <MapPin className="mr-3 text-primary" /> {location}
               </li>
             </ul>
           </div>
 
           {/* Social Links */}
           <div className="mt-8">
-            <h4 className="text-lg font-medium text-[#5c4b36] mb-2">
+            <h4 className="text-lg font-medium text-accent mb-2">
               Connect with me:
             </h4>
             <div className="flex space-x-4">
@@ -97,14 +97,14 @@ fetchUserData();
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Linkedin className="w-7 h-7 text-[#c4a16c] hover:text-[#a8845b] transition" />
+              <Linkedin className="w-7 h-7 text-primary hover:text-accent transition" />
             </a>
             <a
               href={github !== "Not available" ? github : "#"}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Github className="w-7 h-7 text-[#c4a16c] hover:text-[#a8845b] transition" />
+              <Github className="w-7 h-7 text-primary hover:text-accent transition" />
             </a>
           </div>
           </div>

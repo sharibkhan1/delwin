@@ -80,7 +80,7 @@ const HeroSection = () => {
         <span className='text-xl text-gradient-brown md:mt-[-7%] mt-[-5%] font-semibold text-end'>
           & STRAND
           </span>
-        <span className='mt-5 md:mt-0 text-[#3a3a3a]'>
+        <span className='mt-5 md:mt-0 text-foreground'>
         <MorphingText texts={texts} />
         </span>
       </h1>

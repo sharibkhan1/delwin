@@ -53,40 +53,36 @@ body {
 }
 @layer base {
   :root {
-    --background: 30 33% 96%; /* Soft cream background */
-    --foreground: 30 10% 23%; /* Deep gray text */
-    --card: 30 33% 98%; /* Slightly lighter card background */
-    --card-foreground: 30 10% 23%; /* Same deep gray for text on cards */
-    --popover: 30 33% 97%; /* Light beige popover */
-    --popover-foreground: 30 10% 23%; /* Consistent text color */
+    --background: 42 100% 97%; /* #FFFBF4 - Soft cream */
+    --foreground: 36 14% 24%; /* #403E35 - Darker gray-brown */
+
+    --card: 42 34% 86%; /* #E3DAC8 - Slightly lighter beige */
+    --card-foreground: 42 15% 28%; /* #565449 - Dark gray-brown */
+
+    --popover: 42 27% 80%; /* #D8CFBC - Light beige */
+    --popover-foreground: 36 14% 24%; /* #403E35 - Darker text */
+
+    --primary: 42 15% 28%; /* #565449 - Earthy gray-brown */
+    --primary-foreground: 42 100% 97%; /* #FFFBF4 - Light text on dark */
+
+    --secondary: 42 28% 76%; /* #D0C5AB - Slightly darker beige for depth */
+    --secondary-foreground: 36 14% 24%; /* #403E35 - Dark gray-brown */
+
+    --muted: 42 27% 80%; /* #D8CFBC - Light beige */
+    --muted-foreground: 42 8% 40%; /* #6B685A - Softer gray-brown text */
+
+    --accent: 42 22% 6%; /* #11120D - Dark black-brown */
+    --accent-foreground: 42 100% 97%; /* #FFFBF4 - Light text on dark */
+
+    --destructive: 36 14% 18%; /* #332F26 - Deep brown */
+    --destructive-foreground: 42 100% 97%; /* #FFFBF4 - Light text on dark */
+
+    --radius: 1rem; /* Soft rounded corners */
+}
+
   
-    --primary: 36 38% 50%; /* Warm gold accent */
-    --primary-foreground: 30 33% 96%; /* Light text on gold buttons */
+
   
-    --secondary: 24 22% 75%; /* Soft beige for secondary elements */
-    --secondary-foreground: 30 10% 23%; /* Deep gray text on secondary backgrounds */
-  
-    --muted: 30 20% 85%; /* Subtle muted background */
-    --muted-foreground: 30 10% 45%; /* Mid-gray muted text */
-  
-    --accent: 25 25% 40%; /* Rich brown accent */
-    --accent-foreground: 30 33% 96%; /* Light text for accent elements */
-  
-    --destructive: 0 70% 50%; /* Bold red for warnings */
-    --destructive-foreground: 30 33% 96%; /* Light text on destructive backgrounds */
-  
-    --border: 30 20% 80%; /* Light beige borders */
-    --input: 30 20% 80%; /* Consistent with border for inputs */
-    --ring: 30 10% 23%; /* Dark ring color for focus states */
-  
-    --chart-1: 36 50% 55%; /* Gold tone */
-    --chart-2: 25 30% 40%; /* Brown tone */
-    --chart-3: 45 60% 65%; /* Warm sand tone */
-    --chart-4: 20 35% 30%; /* Darker brown */
-    --chart-5: 10 60% 45%; /* Earthy terracotta */
-  
-    --radius: 1rem; /* Softer rounded corners */
-  }
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -126,84 +122,84 @@ body {
 
 
 .bg-cream-beige {
-  background: linear-gradient(to bottom right, #f5e0ca, #e9e3dd); /* Soft cream to beige */
+  background: linear-gradient(to bottom right, #FFFBF4, #D8CFBC); /* Soft cream to beige */
 }
 
 .bg-gold-brown {
-  background: linear-gradient(to top right, #dfcbad, #7a5e47); /* Warm gold to rich brown */
+  background: linear-gradient(to top right, #D8CFBC, #565449); /* Beige to dark brown */
 }
 
 .bg-brown-ivory {
-  background: linear-gradient(to bottom right, #7a5e47, #f7f4f1); /* Rich brown fading to cream */
+  background: linear-gradient(to bottom right, #565449, #FFFBF4); /* Dark brown fading to cream */
 }
+
 .bg-brown-ivory2 {
-  background: linear-gradient(to bottom right, #7a5e47, #f0c8a0); /* Rich brown fading to cream */
+  background: linear-gradient(to bottom right, #565449, #D8CFBC); /* Dark brown fading to beige */
 }
 
 .bg-dark-brown-gold {
-  background: linear-gradient(to top right, #3d2e25, #c4a16c); /* Deep brown to gold */
+  background: linear-gradient(to top right, #11120D, #D8CFBC); /* Deep brown to beige */
 }
 
 .bg-beige-cream {
-  background: linear-gradient(to top, #e9e3dd, #f7f4f1); /* Subtle beige to soft cream */
+  background: linear-gradient(to top, #D8CFBC, #FFFBF4); /* Beige to soft cream */
 }
 
 .bg-brown-gradient {
-  background: linear-gradient(to left, #7a5e47, #3d2e25); /* Rich to dark brown */
+  background: linear-gradient(to left, #565449, #11120D); /* Rich dark brown to deep black-brown */
 }
 
 .bg-cream-gold {
-  background: linear-gradient(to left, #f7f4f1, #c4a16c); /* Cream blending into warm gold */
+  background: linear-gradient(to left, #FFFBF4, #D8CFBC); /* Cream blending into warm beige */
 }
 
-
+.bg-grad {
+  background: linear-gradient(to top, #11120D, #565449, #FFFBF4);
+}
 
 .gradient-gray {
-  background: linear-gradient(to right, #3a3a3a, #7a5e47); /* Deep gray to rich brown */
+  background: linear-gradient(to right, #565449, #11120D); /* Deep gray-brown to dark brown */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-
-
+/* Shadows */
 .shadow-gold {
-  box-shadow: 0 4px 10px rgba(196, 161, 108, 0.6); /* Warm gold shadow */
+  box-shadow: 0 4px 10px rgba(216, 207, 188, 0.6); /* Beige shadow */
 }
 
 .shadow-cream {
-  box-shadow: 0 4px 10px rgba(247, 244, 241, 0.5); /* Soft cream shadow */
+  box-shadow: 0 4px 10px rgba(255, 251, 244, 0.5); /* Soft cream shadow */
 }
 
 .browny {
-  box-shadow: 0 4px 10px rgba(122, 94, 71, 0.5); /* Rich brown shadow */
+  box-shadow: 0 4px 10px rgba(86, 84, 73, 0.5); /* Dark brown shadow */
 }
 
-
-
+/* Text Gradients */
 .text-gradient-gold {
-  background: linear-gradient(to right, #c4a16c, #3a3a3a); /* Gold to deep gray */
+  background: linear-gradient(to right, #D8CFBC, #565449); /* Beige to dark brown */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gradient-ivory {
-  background: linear-gradient(to right, #f7f4f1, #e9e3dd); /* Cream to beige */
+  background: linear-gradient(to right, #FFFBF4, #D8CFBC); /* Cream to beige */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gradient-brown {
-  background: linear-gradient(to right, #7a5e47, #3d2e25); /* Rich brown to dark brown */
+  background: linear-gradient(to right, #565449, #11120D); /* Rich brown to deep brown */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gradient-soft {
-  background: linear-gradient(to right, #e9e3dd, #3a3a3a); /* Soft beige to deep gray */
+  background: linear-gradient(to right, #D8CFBC, #565449); /* Soft beige to dark gray */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
 
 
 @layer base {

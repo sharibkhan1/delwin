@@ -152,8 +152,8 @@ const Page = () => {
 
     {/* Centered Header */}
     <div className="header flex w-screen flex-col items-center text-center font-extrabold uppercase absolute md:top-[30%] top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-      <h1 className="text-[24vw] md:text-[15.5vw] leading-none">STONE</h1>
-      <h2 className="text-xl ml-[50%] md:text-2xl font-semibold">& STRAND</h2>
+      <h1 className="text-[24vw] md:text-[15.5vw] text-primary leading-none">STONE</h1>
+      <h2 className="text-xl ml-[50%] md:text-2xl text-primary font-semibold">& STRAND</h2>
     </div>
 
     <div className="hero-img w-full h-[40vh] p-4 md:px-10 md:h-[50%] ">

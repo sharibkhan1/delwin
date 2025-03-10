@@ -170,7 +170,7 @@ const ServicesPage = () => {
             variant="link"
             onClick={handleClick}
             className={`text-lg md:text-2xl mb-[2.5em] font-semibold flex items-end gap-1 md:gap-2 ${
-              index % 2 === 0 ? 'text-[#f7f4f1]' : 'text-[#c4a16c]'
+              index % 2 === 0 ? 'text-background' : 'text-secondary'
             }`}
             >
               Explore <MoveRightIcon size={20} />
@@ -188,7 +188,7 @@ const ServicesPage = () => {
   return (
     <div className='app' ref={container}>
       <section className='intro relative w-screen h-max py-6 px-2 flex items-center justify-center text-center' >
-      <h1 className='text-center volkhov-bold  text-[#5c4b36] text-4xl md:text-6xl  font-bold' >Projects</h1>
+      <h1 className='text-center volkhov-bold  text-accent text-4xl md:text-6xl  font-bold' >Projects</h1>
       </section>
       <section className='cards '>
         {cards.map((card,index)=>(

@@ -41,15 +41,15 @@ function AboutPage() {
   return (
 <div className="flex flex-col items-center w-full min-h-[400px] px-4">
   {/* Page Title */}
-  <h1 className="tpp text-4xl volkhov-bold  text-[#5c4b36] md:text-6xl font-bold text-center mb-10">
-    About <span className="text-[#c4a16c]">Our</span>  Services
+  <h1 className="tpp text-4xl volkhov-bold  text-foreground md:text-6xl font-bold text-center mb-10">
+    About <span className="text-primary/70">Our</span>  Services
   </h1>
 
   <div className="w-full  max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-10">
     {/* Left Side - Text Section */}
-    <div className="flex h-[17rem] flex-col p-4 bg-gold-brown rounded-lg  justify-around px-4 md:px-8">
+    <div className="flex h-[17rem] flex-col p-4 bg-gold-brown rounded-2xl  justify-around px-4 md:px-8">
       <h2 className="text-2xl text-primary-foreground md:text-4xl font-semibold">
-        Why <span className="text-secondary-foreground">Choose</span> Us?
+        Why <span className="text-secondary-foreground font-bold">Choose</span> Us?
       </h2>
       <p className="text-primary-foreground text-sm md:text-lg">
       At Stone & Strand, we craft spaces that blend timeless design with modern living. Our name reflects our approach Stone for solid foundations, Strand for the finer details.
