@@ -19,7 +19,7 @@ export function CrossPatternCard({
       className={cn(
         "border w-full rounded-md overflow-hidden",
         "bg-black dark:bg-zinc-950",
-        "border-zinc-200 dark:border-zinc-900",
+        "border-zinc-700 dark:border-zinc-900",
         className
       )}
       initial={{ opacity: 0, y: -20 }}
@@ -28,12 +28,12 @@ export function CrossPatternCard({
     >
       <div className={cn(
         "size-full bg-repeat bg-[length:95px_95px]",
-        "bg-cross-pattern dark:bg-cross-pattern",
+        "bg-cross-pattern-light dark:bg-cross-pattern",
         patternClassName
       )}>
         <div className={cn(
           "size-full bg-gradient-to-tr",
-          "from-amber-950/[0.93] to-amber-950/[0.93] ",
+          "from-[#403e35bb] to-[#11120dd0] ",
           "dark:from-zinc-950 dark:via-zinc-950/[0.93] dark:to-zinc-950",
           gradientClassName
         )}>
