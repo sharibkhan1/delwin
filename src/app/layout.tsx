@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SessionProvider from "./SessionProvider";
 import { Toaster } from "sonner";
-import Image from 'next/image'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,7 +30,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} relative overflow-x-hidden antialiased`}
       >
               <SessionProvider>
-              <div className="fixed top-3 z-50 right-0">
+              {/* <div className="fixed top-3 z-50 right-0">
               <Image
                 src="/logo.png"
                 width={58} // Adjust width
@@ -40,7 +39,7 @@ export default function RootLayout({
                 className="object-contain w-[50px] h-[50px] "
                 priority
               />
-            </div>
+            </div> */}
         {children}
         <Toaster />
               </SessionProvider>
