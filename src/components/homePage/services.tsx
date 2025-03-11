@@ -160,23 +160,23 @@ const ServicesPage = () => {
       <div className='card  pointer-events-none relative' id={`card-${index+1}`} >
       <div
         className={`card-inner  relative transform w-screen h-full p-[2em] flex gap-[4em] ${
-          index % 2 === 0 ? 'bg-secondary' : 'bg-primary-foreground'
+          index % 2 === 0 ? 'bg-secondary' : 'bg-popover'
         }`}
       >
         <div className='card-content flex-[3]' >
         <div className="flex items-center flex-row md:items-center gap-2 md:gap-4">
-        <h1 className='font-bold mb-[2.5em] text-3xl md:text-[4rem] ' >{title}</h1>
+        <h1 className='font-bold mb-[2.5em] text-3xl  md:text-[4rem] ' >{title}</h1>
             <Button
             variant="link"
             onClick={handleClick}
             className={`text-lg md:text-2xl mb-[2.5em] pointer-events-auto font-semibold flex items-end gap-1 md:gap-2 ${
-              index % 2 === 0 ? 'text-background' : 'text-secondary'
+              index % 2 === 0 ? 'text-secondary-foreground/70' : 'text-popover-foreground/70'
             }`}
             >
               Explore <MoveRightIcon size={20} />
             </Button>
           </div>
-            <p className='text-[1.25rem] md:max-w-[35rem] max-w-[30rem] font-semibold ' >{copy}</p>
+            <p className='text-[1.25rem] text-secondary-foreground/70 md:max-w-[35rem] max-w-[30rem] font-semibold ' >{copy}</p>
           </div>
           <div className='card-img hidden md:block flex-1 rounded-lg overflow-hidden size-[16/9] ' >
             <img alt="" className='w-full h-full object-cover ' src={`/assets/d${index+1}.jpg`} />
@@ -188,7 +188,7 @@ const ServicesPage = () => {
   return (
     <div className='app' ref={container}>
       <section className='intro relative w-screen  pointer-events-none h-max py-6 px-2 flex items-center justify-center text-center' >
-      <h1 className='text-center volkhov-bold  text-accent text-4xl md:text-6xl  font-bold' >Projects</h1>
+      <h1 className='text-center volkhov-bold  text-foreground text-4xl md:text-6xl  font-bold' >Projects</h1>
       </section>
       <section className='cards '>
         {cards.map((card,index)=>(

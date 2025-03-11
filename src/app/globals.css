@@ -53,32 +53,33 @@ body {
 }
 @layer base {
   :root {
-    --background: 42 100% 97%; /* #FFFBF4 - Soft cream */
-    --foreground: 36 14% 24%; /* #403E35 - Darker gray-brown */
+    --background: 220 15% 10%; /* Dark grayish-blue background */
+    --foreground: 220 15% 90%; /* Light gray text */
 
-    --card: 42 34% 86%; /* #E3DAC8 - Slightly lighter beige */
-    --card-foreground: 42 15% 28%; /* #565449 - Dark gray-brown */
+    --card: 220 15% 16%; /* Slightly lighter dark gray */
+    --card-foreground: 220 15% 90%; /* Light gray text */
 
-    --popover: 42 27% 80%; /* #D8CFBC - Light beige */
-    --popover-foreground: 36 14% 24%; /* #403E35 - Darker text */
+    --popover: 220 15% 14%; /* Dark gray */
+    --popover-foreground: 220 15% 90%; /* Light gray text */
 
-    --primary: 42 15% 28%; /* #565449 - Earthy gray-brown */
-    --primary-foreground: 42 100% 97%; /* #FFFBF4 - Light text on dark */
+    --primary: 220 15% 90%; /* Light gray */
+    --primary-foreground: 220 15% 10%; /* Dark background */
 
-    --secondary: 42 28% 76%; /* #D0C5AB - Slightly darker beige for depth */
-    --secondary-foreground: 36 14% 24%; /* #403E35 - Dark gray-brown */
+    --secondary: 220 10% 20%; /* Muted dark gray */
+    --secondary-foreground: 220 15% 90%; /* Light gray text */
 
-    --muted: 42 27% 80%; /* #D8CFBC - Light beige */
-    --muted-foreground: 42 8% 40%; /* #6B685A - Softer gray-brown text */
+    --muted: 220 10% 25%; /* Slightly lighter muted gray */
+    --muted-foreground: 220 5% 60%; /* Dimmed gray text */
 
-    --accent: 42 22% 6%; /* #11120D - Dark black-brown */
-    --accent-foreground: 42 100% 97%; /* #FFFBF4 - Light text on dark */
+    --accent: 220 30% 50%; /* Subtle accent blue */
+    --accent-foreground: 220 15% 10%; /* Dark background */
 
-    --destructive: 36 14% 18%; /* #332F26 - Deep brown */
-    --destructive-foreground: 42 100% 97%; /* #FFFBF4 - Light text on dark */
+    --destructive: 0 80% 50%; /* Red for destructive actions */
+    --destructive-foreground: 220 15% 90%; /* Light text on dark */
 
     --radius: 1rem; /* Soft rounded corners */
 }
+
 
   
 
@@ -121,82 +122,84 @@ body {
 }
 
 
+/* Background Gradients */
+/* Background Gradients */
 .bg-cream-beige {
-  background: linear-gradient(to bottom right, #FFFBF4, #D8CFBC); /* Soft cream to beige */
+  background: linear-gradient(to bottom right, #1E1E1E, #2A2A2A); /* Dark gray to slightly lighter gray */
 }
 
 .bg-gold-brown {
-  background: linear-gradient(to top right, #D8CFBC, #565449); /* Beige to dark brown */
+  background: linear-gradient(to top right, #000000, #2A2A2A); /* Pure black to dark gray */
 }
 
 .bg-brown-ivory {
-  background: linear-gradient(to bottom right, #565449, #FFFBF4); /* Dark brown fading to cream */
+  background: linear-gradient(to bottom right, #2A2A2A, #EAEAEA); /* Dark gray fading to soft white */
 }
 
 .bg-brown-ivory2 {
-  background: linear-gradient(to bottom right, #565449, #D8CFBC); /* Dark brown fading to beige */
+  background: linear-gradient(to bottom right, #1E1E1E, #6E6E6E); /* Dark gray to medium gray */
 }
 
 .bg-dark-brown-gold {
-  background: linear-gradient(to top right, #11120D, #D8CFBC); /* Deep brown to beige */
+  background: linear-gradient(to top right, #000000, #6E6E6E); /* Black to medium gray */
 }
 
 .bg-beige-cream {
-  background: linear-gradient(to top, #D8CFBC, #FFFBF4); /* Beige to soft cream */
+  background: linear-gradient(to top, #2A2A2A, #F5F5F5); /* Dark gray to very light gray */
 }
 
 .bg-brown-gradient {
-  background: linear-gradient(to left, #565449, #11120D); /* Rich dark brown to deep black-brown */
+  background: linear-gradient(to left, #1E1E1E, #000000); /* Rich dark gray to black */
 }
 
 .bg-cream-gold {
-  background: linear-gradient(to left, #FFFBF4, #D8CFBC); /* Cream blending into warm beige */
+  background: linear-gradient(to left, #000000, #EAEAEA); /* Black blending into soft white */
 }
 
 .bg-grad {
-  background: linear-gradient(to top, #11120D, #565449, #FFFBF4);
+  background: linear-gradient(to top, #000000, #1e1e1eb7, #f5f5f594);
 }
 
 .gradient-gray {
-  background: linear-gradient(to right, #565449, #11120D); /* Deep gray-brown to dark brown */
+  background: linear-gradient(to right, #1E1E1E, #000000); /* Deep black to dark gray */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 /* Shadows */
 .shadow-gold {
-  box-shadow: 0 4px 10px rgba(216, 207, 188, 0.6); /* Beige shadow */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6); /* Dark shadow */
 }
 
 .shadow-cream {
-  box-shadow: 0 4px 10px rgba(255, 251, 244, 0.5); /* Soft cream shadow */
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3); /* Light soft white shadow */
 }
 
 .browny {
-  box-shadow: 0 4px 10px rgba(86, 84, 73, 0.5); /* Dark brown shadow */
+  box-shadow: 0 4px 10px rgba(46, 46, 46, 0.5); /* Gray shadow */
 }
 
 /* Text Gradients */
 .text-gradient-gold {
-  background: linear-gradient(to right, #D8CFBC, #565449); /* Beige to dark brown */
+  background: linear-gradient(to right, #6E6E6E, #1E1E1E); /* Medium gray to dark gray */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gradient-ivory {
-  background: linear-gradient(to right, #FFFBF4, #D8CFBC); /* Cream to beige */
+  background: linear-gradient(to right, #F5F5F5, #6E6E6E); /* White to soft gray */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gradient-brown {
-  background: linear-gradient(to right, #565449, #11120D); /* Rich brown to deep brown */
+  background: linear-gradient(to right, #000000, #1E1E1E); /* Deep black to dark gray */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gradient-soft {
-  background: linear-gradient(to right, #D8CFBC, #565449); /* Soft beige to dark gray */
+  background: linear-gradient(to right, #EAEAEA, #1E1E1E); /* Light gray fading to dark */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

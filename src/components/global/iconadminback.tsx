@@ -15,7 +15,7 @@ const IconBackadminButton = () => {
             className="rounded-full"
             onClick={() => router.back()}
           >
-            <MoveLeftIcon className="w-8 h-8 text-primary-foreground" />
+            <MoveLeftIcon className="w-8 h-8 text-primary" />
           </Button>
     </div>
   )

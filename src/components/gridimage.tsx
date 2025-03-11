@@ -65,7 +65,7 @@ export function LayoutGridDemo() {
   return (
     <div className="h-screen w-full">
        <h2 className="volkhov-bold  text-5xl md:text-6xl font-bold text-center text-foreground">
-       Glimpse <span className="text-primary/70">of Our</span> Work
+       Glimpse <span className="text-primary/50">of Our</span> Work
       </h2>
       <LayoutGrid cards={cards} />
     </div>

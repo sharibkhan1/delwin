@@ -74,13 +74,13 @@ const HeroSection = () => {
     {/* Upper Section - Text */}
     <div className="flex flex-col  items-center justify-center text-center h-full md:h-[50%] px-6 md:px-20">
       <h1 className="text-[24vw]  mt-[-5%] flex-col text-center flex md:text-[15.5vw] font-extrabold uppercase">
-        <span className='text-gradient-brown' >
+        <span className='text-gradient-ivory' >
         STONE 
         </span>
-        <span className='text-xl text-gradient-brown md:mt-[-7%] mt-[-5%] font-semibold text-end'>
+        <span className='text-xl text-secondary-foreground/60 md:mt-[-7%] mt-[-5%] font-semibold text-end'>
           & STRAND
           </span>
-        <span className='mt-5 md:mt-0 text-foreground'>
+        <span className='mt-5 md:mt-0 text-primary'>
         <MorphingText texts={texts} />
         </span>
       </h1>

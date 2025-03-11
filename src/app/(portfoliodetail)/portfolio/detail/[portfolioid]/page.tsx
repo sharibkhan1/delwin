@@ -61,7 +61,7 @@ const PortfolioDetail = ({ params }: { params: Promise<{ portfolioid: string }> 
       {/* Header Section */}
       <div className="bg-secondary pl-7 p-4 rounded-lg" >
       <h1 className="text-4xl volkhov-bold  md:text-6xl font-bold text-secondary-foreground">{portfolio.name}</h1>
-      <p className="text-lg max-w-6xl text-pr mt-2">{portfolio.description}</p>
+      <p className="text-lg text-secondary-foreground/70 max-w-6xl text-pr mt-2">{portfolio.description}</p>
 
       </div>
 
@@ -69,8 +69,8 @@ const PortfolioDetail = ({ params }: { params: Promise<{ portfolioid: string }> 
       {portfolio.images?.length > 0 && (
         <div className="mt-6 border-t-2 border-black ">
           <h2 className="text-4xl font-bold text-foreground mt-5">Gallery</h2>
-          <div className="border-2 mt-4 rounded-md p-1 md:p-2 bg-secondary-foreground z-10 border-black">
-          <div className="grid border-2 bg-cream-beige border-black rounded-md grid-cols-1 sm:grid-cols-2 p-2 md:p-5 md:grid-cols-3 gap-4 ">
+          <div className="border-2 mt-4 rounded-md p-1 md:p-2 bg-secondary-foreground/90 z-10 ">
+          <div className="grid border-2 bg-cream-beige rounded-md grid-cols-1 sm:grid-cols-2 p-2 md:p-5 md:grid-cols-3 gap-4 ">
             {portfolio.images.map((image: string, index: number) => (
                 image ? (
                   <ImageZoom

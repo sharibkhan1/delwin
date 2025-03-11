@@ -40,8 +40,8 @@ export default function Home() {
       id="contact"
       className="py-5 "
     >
-      <div className="w-screen h-[2px] bg-yellow-900 mb-1" />
-      <div className="w-screen h-[2px] bg-yellow-900 " />
+      <div className="w-screen h-[2px] bg-primary/80 mb-1" />
+      <div className="w-screen h-[2px] bg-primary/80" />
      <ContactPage2/>
     </section>
 

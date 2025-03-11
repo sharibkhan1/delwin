@@ -15,7 +15,7 @@ const IconBackButton = () => {
             className="rounded-full"
             onClick={() => router.push("/home")}
           >
-            <MoveLeftIcon className="w-8 h-8 text-primary-foreground" />
+            <MoveLeftIcon className="w-8 h-8 text-primary" />
           </Button>
     </div>
   )
