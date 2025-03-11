@@ -54,9 +54,9 @@ const MessagesPage = () => {
           {messages.map((msg, index) => (
             <div key={index} className="p-4 border rounded-lg shadow-md">
               <h2 className="text-xl font-semibold">{msg.name}</h2>
-              <p className="text-gray-600"><strong>Email:</strong> {msg.email}</p>
-              <p className="text-gray-600"><strong>Phone:</strong> {msg.phone}</p>
-              <p className="text-gray-700 mt-2">{msg.description}</p>
+              <p className="text-primary/70"><strong>Email:</strong> {msg.email}</p>
+              <p className="text-primary/70"><strong>Phone:</strong> {msg.phone}</p>
+              <p className="text-primary/90 mt-2">{msg.description}</p>
             </div>
           ))}
         </div>

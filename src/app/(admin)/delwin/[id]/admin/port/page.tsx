@@ -89,7 +89,7 @@ const PortfolioPage = ({ params }: { params: Promise<{ id: string }> }) => {
           <IconBackadminButton />
           <h1 className="text-4xl font-semibold">Manage Portfolios</h1>
           <Button onClick={createNewPortfolio} className="flex items-center gap-2">
-            <Plus size={20} /> Create Portfolio
+            <Plus size={20} /> Create
           </Button>
         </div>
       </div>
@@ -97,7 +97,7 @@ const PortfolioPage = ({ params }: { params: Promise<{ id: string }> }) => {
       {/* Dropdown Filter */}
       <div className="absolute left-3 top-[100px]">
         <select
-          className="border p-2 rounded-md text-lg bg-white shadow-md"
+          className="border p-2 rounded-md text-primary-foreground text-lg bg-secondary-foreground shadow-md"
           value={selectedType}
           onChange={(e) => setSelectedType(e.target.value)}
         >

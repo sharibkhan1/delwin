@@ -183,7 +183,7 @@ const Page = ({ params }: { params: Promise<{ id: string }> }) => {
       {/* Forms Column (30%) */}
       <div className="space-y-6 col-span-1">
         {/* Image Upload Form */}
-        <div className="bg-gray-50 p-4 rounded-lg shadow">
+        <div className="bg-secondary p-4 rounded-lg shadow">
           <h2 className="text-lg font-medium mb-2">Upload Image to /home</h2>
           <Label htmlFor="imageName">Image Name</Label>
           <Input
@@ -210,7 +210,7 @@ const Page = ({ params }: { params: Promise<{ id: string }> }) => {
         </div>
   
         {/* Text Save Form */}
-        <div className="bg-gray-50 p-4 rounded-lg shadow">
+        <div className="bg-secondary p-4 rounded-lg shadow">
           <h2 className="text-lg font-medium mb-2">Save Text with Title</h2>
           <Label htmlFor="title">Title</Label>
           <Input
@@ -238,7 +238,7 @@ const Page = ({ params }: { params: Promise<{ id: string }> }) => {
       </div>
   
       {/* Uploaded Images Column (70%) */}
-      <div className="col-span-2 bg-gray-50 p-4 overflow-y-auto max-h-[530px] h-[530px] rounded-lg shadow">
+      <div className="col-span-2 bg-secondary p-4 overflow-y-auto max-h-[530px] h-[530px] rounded-lg shadow">
         <h2 className="text-lg font-medium mb-4">Uploaded Images</h2>
         {images.length ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -264,7 +264,7 @@ const Page = ({ params }: { params: Promise<{ id: string }> }) => {
     </div>
   
     {/* Row 2: Titles & Descriptions List (Single Column) */}
-    <div className="bg-gray-50 p-4 overflow-y-auto max-h-[430px] h-[430px] rounded-lg shadow">
+    <div className="bg-secondary p-4 overflow-y-auto max-h-[430px] h-[430px] rounded-lg shadow">
       <h2 className="text-lg font-medium mb-4">Saved Titles & Descriptions</h2>
       {userData.savedText?.length ? (
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

@@ -153,7 +153,7 @@ const PortfolioEditor = ({ params }: { params: Promise<{ portfolioid: string }> 
       {loading ? (
         <p>Loading portfolio data...</p>
       ) : (
-        <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md space-y-4">
+        <div className="max-w-3xl mx-auto bg-secondary shadow-primary/80 p-6 rounded-lg shadow-md space-y-4">
           <div>
             <Label>Name</Label>
             <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="Portfolio Name" />
@@ -166,7 +166,7 @@ const PortfolioEditor = ({ params }: { params: Promise<{ portfolioid: string }> 
 
           <div>
             <Label>Portfolio Type</Label>
-            <select value={type} onChange={(e) => setType(e.target.value)} className="border p-2 rounded-md w-full">
+            <select value={type} onChange={(e) => setType(e.target.value)} className="border p-2 bg-secondary rounded-md w-full">
               <option>BEDROOM</option>
               <option>LIVING ROOM</option>
               <option>BATHROOM</option>
