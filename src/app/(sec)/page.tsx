@@ -157,7 +157,7 @@ const Page = () => {
     </div>
 
     <div className="hero-img w-full h-[40vh] p-4 md:px-10 md:h-[50%] ">
-      <img className='w-full h-full object-cover rounded-b-[2rem]' src='/d1.jpg' alt='' />
+      <img className='w-full h-full object-cover rounded-b-[2rem]' src='/iii.jpeg' alt='' />
     </div>
   </section>
 </div>

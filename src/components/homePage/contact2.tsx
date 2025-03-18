@@ -36,7 +36,6 @@ const ContactPage = () => {
         if (docSnap.exists()) {
           const data = docSnap.data() as UserData;
           setUserData(data); // Set state
-          localStorage.setItem("contactData", JSON.stringify(data)); // Save to localStorage
         } else {
           console.warn("No user document found.");
         }
@@ -46,14 +45,7 @@ const ContactPage = () => {
         setLoading(false);
       }
     };
-
-    // 🗄️ Load from localStorage or fetch if not found
-    const storedData = localStorage.getItem("contactData");
-    if (storedData) {
-      setUserData(JSON.parse(storedData));
-    } else {
       fetchUserData();
-    }
   }, [userId]);
 
   // 🕒 Loading state

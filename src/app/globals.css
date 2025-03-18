@@ -187,7 +187,7 @@ body {
 }
 
 .text-gradient-ivory {
-  background: linear-gradient(to right, #F5F5F5, #6E6E6E); /* White to soft gray */
+  background: linear-gradient(to right, #F5F5F5, #c7c6c6); /* White to soft gray */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
