@@ -85,11 +85,11 @@ const PortfolioEditor = ({ params }: { params: Promise<{ portfolioid: string }> 
   
       let existingPortfolios = [];
       let existingImages: string[] = [];
-
+  
       if (docSnap.exists()) {
         const userData = docSnap.data();
         existingPortfolios = userData.portfolios || [];
-
+  
         const existingPortfolio = existingPortfolios.find((p: Portfolio) => p.id === portfolioId);
         if (existingPortfolio) {
           existingImages = existingPortfolio.images || [];
@@ -99,11 +99,15 @@ const PortfolioEditor = ({ params }: { params: Promise<{ portfolioid: string }> 
       }
   
       // ✅ Ensure we only store URLs (not File objects)
-    const uploadedPortfolioImages = portfolioImages.length > 0
-      ? await uploadImages(portfolioImages, `port/${portfolioId}`)
-      : [];
+      const uploadedPortfolioImages = portfolioImages.length > 0
+        ? await uploadImages(portfolioImages, `port/${portfolioId}`)
+        : [];
+  
       const finalImageUrls = [...existingImages, ...uploadedPortfolioImages]; // Merge images
-
+  
+      // ✅ Convert type format to uppercase before saving
+      const formattedType = type.toUpperCase();
+  
       // ✅ Check if portfolio already exists
       const portfolioIndex = existingPortfolios.findIndex((p: Portfolio) => p.id === portfolioId);
   
@@ -113,7 +117,7 @@ const PortfolioEditor = ({ params }: { params: Promise<{ portfolioid: string }> 
           id: portfolioId,
           name,
           description,
-          type,
+          type: formattedType,
           images: finalImageUrls,
         };
       } else {
@@ -122,7 +126,7 @@ const PortfolioEditor = ({ params }: { params: Promise<{ portfolioid: string }> 
           id: portfolioId,
           name,
           description,
-          type,
+          type: formattedType,
           images: finalImageUrls,
         });
       }
@@ -137,6 +141,7 @@ const PortfolioEditor = ({ params }: { params: Promise<{ portfolioid: string }> 
       toast.error("Failed to save portfolio.");
     }
   };
+  
 
   const removePortfolioImage = (index: number) => {
     setPortfolioImageUrls((prev) => prev.filter((_, i) => i !== index));
@@ -146,12 +151,12 @@ const PortfolioEditor = ({ params }: { params: Promise<{ portfolioid: string }> 
     <div className="p-4 space-y-6">
       <div className="w-full h-[100px] top-0 left-0 z-10 bg-secondary shadow-md flex items-center justify-between px-4">
         <IconBackadminButton />
-        <h1 className="text-4xl font-semibold">Edit Portfolio</h1>
+        <h1 className="text-4xl font-semibold">Edit Services</h1>
         <div className="w-10" />
       </div>
 
       {loading ? (
-        <p>Loading portfolio data...</p>
+        <p>Loading Services data...</p>
       ) : (
         <div className="max-w-3xl mx-auto bg-secondary shadow-primary/80 p-6 rounded-lg shadow-md space-y-4">
           <div>
@@ -165,7 +170,7 @@ const PortfolioEditor = ({ params }: { params: Promise<{ portfolioid: string }> 
           </div>
 
           <div>
-            <Label>Portfolio Type</Label>
+            <Label>Services Type</Label>
             <select value={type} onChange={(e) => setType(e.target.value)} className="border p-2 bg-secondary rounded-md w-full">
               <option>BEDROOM</option>
               <option>LIVING ROOM</option>
@@ -177,7 +182,7 @@ const PortfolioEditor = ({ params }: { params: Promise<{ portfolioid: string }> 
           </div>
 
           <div>
-            <Label>Upload Portfolio Images</Label>
+            <Label>Upload Service Images</Label>
             <Input type="file" multiple onChange={(e) => setPortfolioImages(Array.from(e.target.files || []))} />
           </div>
 
@@ -191,7 +196,7 @@ const PortfolioEditor = ({ params }: { params: Promise<{ portfolioid: string }> 
               </div>
             ))}
           </div>
-          <Button className="" onClick={handleSave}>Save Portfolio</Button>
+          <Button className="" onClick={handleSave}>Save Service</Button>
         </div>
       )}
     </div>

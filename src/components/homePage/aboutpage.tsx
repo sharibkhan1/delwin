@@ -42,7 +42,7 @@ function AboutPage() {
 <div className="flex flex-col items-center w-full min-h-[400px] px-4">
   {/* Page Title */}
   <h1 className="tpp text-4xl volkhov-bold  text-foreground md:text-6xl font-bold text-center mb-10">
-    About <span className="text-primary/50">Our</span>  Services
+    About <span className="text-primary/50">us</span>  
   </h1>
 
   <div className="w-full  max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-10">
