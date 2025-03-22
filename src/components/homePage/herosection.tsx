@@ -104,7 +104,7 @@ const HeroSection = () => {
         />
       ) : (
         <Image
-          src="/d1.jpg"
+          src="/llinig.webp"
           alt="Furnishing Hero"
           layout="fill"
           objectFit="cover"

@@ -1,10 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Mail, Phone, MapPin, Linkedin, Github } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/app/firebase/config";
 import { Skeleton } from "../ui/skeleton";
 import { toast } from "sonner";
+import Image from "next/image";
 
 interface SavedText {
   title: string;
@@ -60,9 +61,9 @@ const ContactPage = () => {
 
   const email = getText("email");
   const phone = getText("phone");
-  const location = getText("location");
-  const linkedin = getText("link1");
-  const github = getText("link2");
+  // const location = getText("location");
+  // const linkedin = getText("link1");
+  // const github = getText("link2");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -97,8 +98,8 @@ const ContactPage = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {/* Left Side: Contact Details */}
-        <div className="flex flex-col shadow-primary/60 justify-between bg-secondary rounded-2xl p-8 shadow-md hover:shadow-lg transition">
-          <div>
+        <div className="flex flex-col relative shadow-primary/60  justify-between bg-secondary rounded-2xl p-8 shadow-md hover:shadow-lg transition">
+          <div className="flex items-start flex-col" >
             <h3 className="text-2xl font-medium text-secondary-foreground mb-8">
               Contact Information
             </h3>
@@ -109,14 +110,21 @@ const ContactPage = () => {
               <li className="flex items-center">
               <Phone className="mr-3 text-muted-foreground" /> {phone}
               </li>
-              <li className="flex items-center">
+              {/* <li className="flex items-center">
               <MapPin className="mr-3 text-muted-foreground" /> {location}
-              </li>
+              </li> */}
             </ul>
           </div>
 
           {/* Social Links */}
-          <div className="mt-8">
+          <Image
+            src="/logo.png"
+            alt="logo"
+            width={200}
+            height={200}
+            className="mt-8 flex items-end"
+          />
+          {/* <div className="mt-8">
             <h4 className="text-lg font-medium text-secondary-foreground mb-2">
               Connect with me:
             </h4>
@@ -136,7 +144,7 @@ const ContactPage = () => {
               <Github className="w-7 h-7 text-muted-foreground hover:text-[#a8845b] transition" />
             </a>
           </div>
-          </div>
+          </div> */}
         </div>
           {/* 📞 Contact */}
           <div className="bg-secondary shadow-primary/60 rounded-2xl p-8 shadow-md hover:shadow-lg transition">
