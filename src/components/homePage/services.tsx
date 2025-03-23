@@ -27,6 +27,7 @@ interface ImageData {
 interface CardProps {
   title: string;
   copy: string;
+  src: string;
   link: string;
   index: number;
 }
@@ -41,7 +42,7 @@ const ServicesPage = () => {
   const container = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
 
-  const userId = "F4DXnuFmS5XN6RQ69UwddqKfsgE3"
+  const userId = "qUWjbrYhDyXyVDgaWlOCenHInDJ2"
 
   useEffect(() => {
     const checkContainer = setInterval(() => {
@@ -152,7 +153,7 @@ const ServicesPage = () => {
 
 
   
-  const Card: React.FC<CardProps> = ({ title, copy, index ,link}) => {
+  const Card: React.FC<CardProps> = ({ title, copy, src, index ,link}) => {
     const handleClick = () => {
       router.push(link);
     };
@@ -179,7 +180,7 @@ const ServicesPage = () => {
             <p className='text-[1.25rem] text-secondary-foreground/70 md:max-w-[35rem] max-w-[30rem] font-semibold ' >{copy}</p>
           </div>
           <div className='card-img hidden md:block flex-1 rounded-lg overflow-hidden size-[16/9] ' >
-            <img alt="" className='w-full h-full object-cover ' src={`/assets/d${index+1}.jpg`} />
+          <img alt={title} className='w-full h-full object-cover' src={src} />
           </div>
         </div>
       </div>
@@ -188,7 +189,7 @@ const ServicesPage = () => {
   return (
     <div className='app' ref={container}>
       <section className='intro relative w-screen  pointer-events-none h-max py-6 px-2 flex items-center justify-center text-center' >
-      <h1 className='text-center volkhov-bold  text-foreground text-4xl md:text-6xl  font-bold' >Our <span className="text-primary/50">Services</span></h1>
+      <h1 className='text-center volkhov-bold  text-foreground text-4xl md:text-6xl  font-bold' >Our <span className="text-primary/50">Projects</span></h1>
       </section>
       <section className='cards '>
         {cards.map((card,index)=>(

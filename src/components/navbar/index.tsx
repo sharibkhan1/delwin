@@ -19,7 +19,7 @@ export default function Navbar() {
         const data = await fetchUserDataa(userId); // Fetch user data
 
         console.log("useIddd",data)
-        if (userId === "F4DXnuFmS5XN6RQ69UwddqKfsgE3") {
+        if (userId === "qUWjbrYhDyXyVDgaWlOCenHInDJ2") {
           setIsAdmin(true);
         }
       } catch (error) {

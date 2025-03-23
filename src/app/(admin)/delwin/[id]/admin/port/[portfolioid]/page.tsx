@@ -4,7 +4,7 @@ import { useState, useEffect, use } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { doc, getDoc, updateDoc, setDoc } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 import { db, storage } from "@/app/firebase/config";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -63,33 +63,35 @@ const PortfolioEditor = ({ params }: { params: Promise<{ portfolioid: string }> 
     fetchPortfolio();
   }, [userId, portfolioId]);
 
-  const uploadImages = async (files: File[], path: string) => {
-    const uploadPromises = files.map(async (file) => {
-      const fileRef = ref(storage, `${path}/${file.name}`);
-      await uploadBytes(fileRef, file);
-      return getDownloadURL(fileRef);
-    });
+    // ✅ Function to handle real-time preview of images before upload
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const files = Array.from(e.target.files || []);
+      if (files.length === 0) return;
+  
+      // Convert File objects to preview URLs for real-time display
+      const previewUrls = files.map((file) => URL.createObjectURL(file));
+  
+      setPortfolioImages((prev) => [...prev, ...files]); // Append new images
+      setPortfolioImageUrls((prev) => [...prev, ...previewUrls]); // Append preview URLs
+    };
 
-    return await Promise.all(uploadPromises);
-  };
-  const handleSave = async () => {
+  const uploadImagesAndSave = async () => {
     if (!name.trim() || !description.trim()) {
       toast.error("Both name and description are required.");
       return;
     }
     if (!userId) return;
-  
+
     try {
       const docRef = doc(db, "retailers", userId);
       const docSnap = await getDoc(docRef);
-  
+
       let existingPortfolios = [];
       let existingImages: string[] = [];
-  
+
       if (docSnap.exists()) {
         const userData = docSnap.data();
         existingPortfolios = userData.portfolios || [];
-  
         const existingPortfolio = existingPortfolios.find((p: Portfolio) => p.id === portfolioId);
         if (existingPortfolio) {
           existingImages = existingPortfolio.images || [];
@@ -97,22 +99,25 @@ const PortfolioEditor = ({ params }: { params: Promise<{ portfolioid: string }> 
       } else {
         await setDoc(docRef, { portfolios: [] });
       }
-  
-      // ✅ Ensure we only store URLs (not File objects)
+
+      // ✅ Upload new images if any
       const uploadedPortfolioImages = portfolioImages.length > 0
-        ? await uploadImages(portfolioImages, `port/${portfolioId}`)
+        ? await Promise.all(portfolioImages.map(async (file) => {
+            const fileRef = ref(storage, `port/${portfolioId}/${file.name}`);
+            await uploadBytes(fileRef, file);
+            return getDownloadURL(fileRef);
+          }))
         : [];
-  
-      const finalImageUrls = [...existingImages, ...uploadedPortfolioImages]; // Merge images
-  
-      // ✅ Convert type format to uppercase before saving
+
+      // ✅ Merge old and new images
+      const finalImageUrls = [...existingImages, ...uploadedPortfolioImages];
+
+      // ✅ Convert type to uppercase
       const formattedType = type.toUpperCase();
-  
-      // ✅ Check if portfolio already exists
+
+      // ✅ Update Firestore
       const portfolioIndex = existingPortfolios.findIndex((p: Portfolio) => p.id === portfolioId);
-  
       if (portfolioIndex !== -1) {
-        // ✅ Update existing portfolio
         existingPortfolios[portfolioIndex] = {
           id: portfolioId,
           name,
@@ -121,7 +126,6 @@ const PortfolioEditor = ({ params }: { params: Promise<{ portfolioid: string }> 
           images: finalImageUrls,
         };
       } else {
-        // ✅ Add new portfolio if not found
         existingPortfolios.push({
           id: portfolioId,
           name,
@@ -130,22 +134,56 @@ const PortfolioEditor = ({ params }: { params: Promise<{ portfolioid: string }> 
           images: finalImageUrls,
         });
       }
-  
-      // ✅ Update the document with the modified array
+
       await updateDoc(docRef, { portfolios: existingPortfolios });
-  
-      toast.success("Portfolio saved successfully!");
+
+      toast.success("Portfolio updated successfully!");
+      setPortfolioImages([]); // Reset new images after successful upload
       router.back();
     } catch (error) {
       console.error("Error saving portfolio:", error);
       toast.error("Failed to save portfolio.");
     }
   };
-  
 
-  const removePortfolioImage = (index: number) => {
-    setPortfolioImageUrls((prev) => prev.filter((_, i) => i !== index));
+  const removePortfolioImage = async (index: number) => {
+    const imageUrl = portfolioImageUrls[index];
+    if (!imageUrl || !userId) return;
+  
+    try {
+      // ✅ Extract the correct storage path from the URL
+      const decodedPath = decodeURIComponent(new URL(imageUrl).pathname.split('/o/')[1]);
+      const fileRef = ref(storage, decodedPath);
+  
+      // ✅ Delete the image from Firebase Storage
+      await deleteObject(fileRef);
+  
+      // ✅ Remove the image URL from state
+      setPortfolioImageUrls((prev) => prev.filter((_, i) => i !== index));
+  
+      // ✅ Update Firestore: Remove the image from portfolio data
+      const docRef = doc(db, "retailers", userId);
+      const docSnap = await getDoc(docRef);
+  
+      if (docSnap.exists()) {
+        const userData = docSnap.data();
+        const updatedPortfolios = userData.portfolios.map((p: Portfolio) => {
+          if (p.id === portfolioId) {
+            return { ...p, images: p.images.filter((url: string) => url !== imageUrl) };
+          }
+          return p;
+        });
+  
+        await updateDoc(docRef, { portfolios: updatedPortfolios });
+  
+        toast.success("Image removed successfully!");
+      }
+    } catch (error) {
+      console.error("Error deleting image:", error);
+      toast.error("Failed to delete image.");
+    }
   };
+  
 
   return (
     <div className="p-4 space-y-6">
@@ -183,7 +221,7 @@ const PortfolioEditor = ({ params }: { params: Promise<{ portfolioid: string }> 
 
           <div>
             <Label>Upload Service Images</Label>
-            <Input type="file" multiple onChange={(e) => setPortfolioImages(Array.from(e.target.files || []))} />
+          <Input type="file" multiple onChange={handleImageChange} />
           </div>
 
           <div className="flex gap-2 flex-wrap">
@@ -193,10 +231,10 @@ const PortfolioEditor = ({ params }: { params: Promise<{ portfolioid: string }> 
                 width={400} // Set a suitable width
                 height={450} src={url} alt="Portfolio" className="w-20 h-20 object-cover rounded-md" />
                 <button onClick={() => removePortfolioImage(index)} className="absolute top-0 right-0 bg-red-500 text-white rounded-full px-2">❌</button>
-              </div>
+                </div>
             ))}
           </div>
-          <Button className="" onClick={handleSave}>Save Service</Button>
+          <Button className="" onClick={uploadImagesAndSave}>Save Service</Button>
         </div>
       )}
     </div>

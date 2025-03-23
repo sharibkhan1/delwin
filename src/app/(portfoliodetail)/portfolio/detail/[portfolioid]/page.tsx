@@ -16,7 +16,7 @@ const PortfolioDetail = ({ params }: { params: Promise<{ portfolioid: string }> 
   const [portfolio, setPortfolio] = useState<Portfolio | null>(null);
   const [loading, setLoading] = useState(true);
   const { portfolioid: portfolioId } = use(params);
-  const userId = "F4DXnuFmS5XN6RQ69UwddqKfsgE3"
+  const userId = "qUWjbrYhDyXyVDgaWlOCenHInDJ2"
 
   useEffect(() => {
     if (!userId || !portfolioId) return;

@@ -4,12 +4,13 @@ import { useState, useEffect, use } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { db } from "@/app/firebase/config";
+import { db, storage } from "@/app/firebase/config";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Pencil, Plus } from "lucide-react";
 import IconBackadminButton from "@/components/global/iconadminback";
 import DeletePortfolioDialog from "./_comp/deletedialgo";
+import { deleteObject, listAll, ref } from "firebase/storage";
 
 const FILTER_TYPES = ["ALL", "BEDROOM", "LIVING ROOM", "BATHROOM", "EXTERIOR", "KITCHEN", "COMMERCIAL"];
 
@@ -59,20 +60,42 @@ const PortfolioPage = ({ params }: { params: Promise<{ id: string }> }) => {
     router.push(`/delwin/${userIdd}/admin/port/${portfolioId}`);
   };
 
+
   const handleDeletePortfolio = async (portfolioId: string) => {
     if (!userId) return;
-
+  
     try {
       const docRef = doc(db, "retailers", userId);
       const docSnap = await getDoc(docRef);
-
+  
       if (!docSnap.exists()) return;
-
+  
       const existingPortfolios = docSnap.data().portfolios || [];
-      const updatedPortfolios = existingPortfolios.filter((p: { id: string; name: string; description: string }) => p.id !== portfolioId);
-
+      const portfolioToDelete = existingPortfolios.find((p: { id: string }) => p.id === portfolioId);
+  
+      if (!portfolioToDelete) return;
+  
+      // ✅ Step 1: Delete images from Firebase Storage
+      const portfolioFolderRef = ref(storage, `port/${portfolioId}`);
+  
+      try {
+        const folderContents = await listAll(portfolioFolderRef);
+  
+        const deletePromises = folderContents.items.map(async (fileRef) => {
+          await deleteObject(fileRef);
+        });
+  
+        await Promise.all(deletePromises);
+      } catch (error) {
+        console.error("Error deleting images from Storage:", error);
+      }
+  
+      // ✅ Step 2: Remove portfolio from Firestore
+      const updatedPortfolios = existingPortfolios.filter((p: { id: string }) => p.id !== portfolioId);
+  
       await updateDoc(docRef, { portfolios: updatedPortfolios });
-
+  
+      // ✅ Step 3: Update local state
       setPortfolios(updatedPortfolios);
       toast.success("Portfolio deleted successfully!");
     } catch (error) {
@@ -80,6 +103,7 @@ const PortfolioPage = ({ params }: { params: Promise<{ id: string }> }) => {
       toast.error("Failed to delete portfolio.");
     }
   };
+  
 
   return (
     <div className="p-4 relative space-y-8">

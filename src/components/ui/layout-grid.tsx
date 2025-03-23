@@ -14,9 +14,17 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
   const [lastSelected, setLastSelected] = useState<Card | null>(null);
 
   const handleClick = (card: Card) => {
-    setLastSelected(selected);
-    setSelected(card);
+    if (selected?.id === card.id) {
+      // If the selected image is clicked again, deselect it
+      setSelected(null);
+      setLastSelected(selected);
+    } else {
+      // Otherwise, select the new image
+      setLastSelected(selected);
+      setSelected(card);
+    }
   };
+  
 
   const handleOutsideClick = () => {
     setLastSelected(selected);
@@ -41,7 +49,7 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
             layoutId={`card-${card.id}`}
           >
             {selected?.id === card.id && <SelectedCard selected={selected} />}
-            <ImageComponent card={card} />
+            <ImageComponent card={card} selected={selected} />
           </motion.div>
         </div>
       ))}
@@ -57,7 +65,7 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
   );
 };
 
-const ImageComponent = ({ card }: { card: Card }) => {
+const ImageComponent = ({ card, selected }: { card: Card; selected: Card | null }) => {
   return (
     <motion.img
       layoutId={`image-${card.id}-image`}
@@ -65,16 +73,18 @@ const ImageComponent = ({ card }: { card: Card }) => {
       height="500"
       width="500"
       className={cn(
-        "object-cover object-top absolute inset-0 h-full w-full transition duration-200"
+        "absolute inset-0 h-full w-full transition duration-200",
+        selected?.id === card.id ? "object-contain" : "object-cover"
       )}
       alt="thumbnail"
     />
   );
 };
 
+
 const SelectedCard = ({ selected }: { selected: Card | null }) => {
   return (
-    <div className="h-max w-max flex flex-col justify-end rounded-lg shadow-2xl relative z-[60]">
+    <div className="h-[90vh] w-[90vw] flex flex-col justify-end rounded-lg shadow-2xl relative z-[60]">
       <motion.div
         initial={{
           opacity: 0,
