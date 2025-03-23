@@ -1,9 +1,6 @@
 "use client";
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { MoveRightIcon } from "lucide-react";
-import { doc, getDoc } from 'firebase/firestore';
-import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage';
-import { db } from '@/app/firebase/config';
 import { cards } from '@/lib/cardse';
 import gsap from "gsap";
 import {useGSAP} from "@gsap/react";
@@ -11,19 +8,6 @@ import {ScrollTrigger} from "gsap/ScrollTrigger"
 import { Button } from '../ui/button';
 import { useRouter } from 'next/navigation';
 
-interface SavedText {
-  title: string;
-  description: string;
-}
-
-interface UserData {
-  savedText?: SavedText[];
-}
-
-interface ImageData {
-  name: string;
-  url: string;
-}
 interface CardProps {
   title: string;
   copy: string;
