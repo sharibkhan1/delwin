@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { db } from "@/app/firebase/config";
 import { collection, getDocs } from "firebase/firestore";
 import { CarouselDemo } from "@/components/imagesldier";
+import { IconMoodEmptyFilled } from "@tabler/icons-react";
 
 type Portfolio = {
   id: string;
@@ -14,9 +15,12 @@ type Portfolio = {
 
 const Page = () => {
   const [slides, setSlides] = useState<{ id: string;title: string; src: string }[]>([]);
+  const [loading, setLoading] = useState(true); // Loading state
 
   useEffect(() => {
     const fetchPortfolios = async () => {
+      setLoading(true);
+
       try {
         const querySnapshot = await getDocs(collection(db, "retailers"));
         const bathroomSlides: {id: string; title: string; src: string }[] = [];
@@ -39,6 +43,8 @@ const Page = () => {
         setSlides(bathroomSlides);
       } catch (error) {
         console.error("Error fetching portfolios:", error);
+      }finally {
+        setLoading(false);
       }
     };
 
@@ -47,8 +53,19 @@ const Page = () => {
 
   return (
     <div className="max-w-7xl mx-auto">
+    {loading ? (
+      <div className="flex justify-center items-center min-h-[400px]">
+        {/* Circular Loader */}
+        <div className="w-12 h-12 border-4 border-gray-300 border-t-primary rounded-full animate-spin"></div>
+      </div>
+    ) : slides.length > 0 ? (
       <CarouselDemo slides={slides} />
-    </div>
+    ) : (
+      <div className="h-[50vh] w-full flex flex-col items-center justify-center " >
+      <IconMoodEmptyFilled className="h-20 w-20" />
+      <p className="text-center text-gray-300 mt-4">No Works found !!!</p>
+        </div>    )}
+  </div>
   );
 };
 

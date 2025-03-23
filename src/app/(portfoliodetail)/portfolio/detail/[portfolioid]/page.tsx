@@ -79,7 +79,7 @@ const PortfolioDetail = ({ params }: { params: Promise<{ portfolioid: string }> 
                     width={800}
                     height={450}
                     alt={`Portfolio Image ${index + 1}`}
-                    className="rounded-lg shadow-md w-full md:h-max h-48 object-cover"
+                    className="rounded-lg bg-brown-ivory shadow-md w-full md:h-max h-48 object-cover"
                   />
                 ) : null
             ))}

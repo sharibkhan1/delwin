@@ -6,12 +6,17 @@ import { db } from "@/app/firebase/config";
 import { useSession } from "next-auth/react";
 import IconBackadminButton from "@/components/global/iconadminback";
 
+
+// const SOURCE_USER_ID = "F4DXnuFmS5XN6RQ69UwddqKfsgE3";
+// const TARGET_USER_ID = "qUWjbrYhDyXyVDgaWlOCenHInDJ2";
+
 const MessagesPage = () => {
   const { data: session } = useSession();
   const userId = session?.user.id;
 
   const [messages, setMessages] = useState<{ name: string; email: string; phone: string; description: string }[]>([]);
   const [loading, setLoading] = useState(false);
+  // const [copying, setCopying] = useState(false);
 
   useEffect(() => {
     if (!userId) return;
@@ -36,6 +41,39 @@ const MessagesPage = () => {
     fetchMessages();
   }, [userId]);
 
+
+  // const copyPortfolio = async () => {
+  //   setCopying(true);
+  //   try {
+  //     // Fetch source user's portfolio
+  //     const sourceDocRef = doc(db, "retailers", SOURCE_USER_ID);
+  //     const sourceDocSnap = await getDoc(sourceDocRef);
+
+  //     if (!sourceDocSnap.exists()) {
+  //       console.error("Source user portfolio not found!");
+  //       return;
+  //     }
+
+  //     const sourceData = sourceDocSnap.data();
+  //     const sourcePortfolios = sourceData.portfolios || [];
+
+  //     if (sourcePortfolios.length === 0) {
+  //       console.warn("No portfolios found for source user.");
+  //       return;
+  //     }
+
+  //     // Update target user's portfolio
+  //     const targetDocRef = doc(db, "retailers", TARGET_USER_ID);
+  //     await updateDoc(targetDocRef, { portfolios: sourcePortfolios });
+
+  //     console.log("Portfolio copied successfully!");
+  //   } catch (error) {
+  //     console.error("Error copying portfolio:", error);
+  //   } finally {
+  //     setCopying(false);
+  //   }
+  // };
+  
   return (
     <div className="p-6 relative  mx-auto">
         <div className="w-full h-[100px] absolute top-0 left-0 z-10 bg-secondary shadow-md flex items-center">
@@ -63,6 +101,13 @@ const MessagesPage = () => {
       ) : (
         <p>No messages found.</p>
       )}
+      {/* <button
+          onClick={copyPortfolio}
+          disabled={copying}
+          className="mt-6 px-6 py-3 bg-primary text-white font-semibold rounded-lg shadow-md disabled:opacity-50"
+        >
+          {copying ? "Copying Portfolio..." : "Copy Portfolio to New User"}
+        </button> */}
       </div>
     </div>
   );

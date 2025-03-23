@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Textarea } from "@/components/ui/textarea";
 import IconBackButton from "@/components/global/iconback";
-import { ListCheck, MessageCircle, X } from "lucide-react";
+import { ListCheck, MessageCircle, UploadIcon, X } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -201,10 +201,11 @@ const Page = ({ params }: { params: Promise<{ id: string }> }) => {
             onChange={(e) => setImageFile(e.target.files?.[0] || null)}
           />
           <Button
-            className="mt-4"
-            onClick={handleImageUpload}
+    className="mt-4 flex items-center gap-2"
+    onClick={handleImageUpload}
             disabled={!imageFile || !imageName.trim()}
           >
+                <UploadIcon className="w-5 h-5" />
             Upload Image
           </Button>
         </div>
