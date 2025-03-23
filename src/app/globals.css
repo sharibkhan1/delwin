@@ -322,7 +322,7 @@ body {
 
 .svggg path {
   fill: transparent;
-  stroke: #3a3a3a;
+  stroke: #e6e5e5;
   stroke-width:0.7;
   stroke-dasharray: 850;
   stroke-dashoffset: 850;
@@ -339,7 +339,7 @@ body {
   }
   80% {
     stroke-dashoffset: 0;
-    fill:#3a3a3a;
+    fill:#e6e5e5;
     opacity: 1;
   }
   100% {
