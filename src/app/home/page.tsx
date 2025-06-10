@@ -3,6 +3,7 @@ import { AboutPage } from "@/components/homePage/aboutpage";
 import ContactPage2 from "@/components/homePage/contact2";
 import HeroSection from "@/components/homePage/herosection";
 import ServicesPage from "@/components/homePage/services";
+import SmService from "@/components/homePage/smservice";
 
 export default function Home() {
 
@@ -31,10 +32,17 @@ export default function Home() {
     </section> */}
       {/* Services Section */}
       
-      <section  id="services"
-    >
-     <ServicesPage/>
-    </section>
+<section id="services">
+  {/* Show ServicesPage on md screens and larger */}
+  <div className="hidden md:block">
+    <ServicesPage />
+  </div>
+  
+  {/* Show SmService on screens smaller than md */}
+  <div className="block md:hidden">
+    <SmService />
+  </div>
+</section>
 
     <section
       id="contact"

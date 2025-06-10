@@ -5,6 +5,7 @@ import { db } from "@/app/firebase/config";
 import { collection, getDocs } from "firebase/firestore";
 import { CarouselDemo } from "@/components/imagesldier";
 import { IconMoodEmptyFilled } from "@tabler/icons-react";
+import IconBackButton from "@/components/global/iconback";
 
 type Portfolio = {
   id: string;
@@ -52,8 +53,10 @@ const Page = () => {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto">
-    {loading ? (
+    <div className="max-w-7xl relative mx-auto">
+      <div className="absolute top-4 left-4 z-[55]" >
+                      <IconBackButton/>
+      </div>    {loading ? (
       <div className="flex justify-center items-center min-h-[400px]">
         {/* Circular Loader */}
         <div className="w-12 h-12 border-4 border-gray-300 border-t-primary rounded-full animate-spin"></div>

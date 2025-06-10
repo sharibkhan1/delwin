@@ -4,8 +4,6 @@ import Image from 'next/image';
 import { doc, getDoc } from 'firebase/firestore';
 import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage';
 import { db } from '@/app/firebase/config';
-import { MorphingText } from '../ui/goofytext';
-import { texts } from '@/lib/cardse';
 
 interface SavedText {
     title: string;
@@ -80,9 +78,9 @@ const HeroSection = () => {
         <span className='text-xl text-secondary-foreground/60 md:mt-[-7%] mt-[-5%] font-semibold text-end'>
           & STRAND
           </span>
-        <span className='mt-5 md:mt-0 text-primary'>
+        {/* <span className='mt-5 md:mt-0 text-primary'>
         <MorphingText texts={texts} />
-        </span>
+        </span> */}
       </h1>
       {/* <p className="md:flex hidden text-lg md:text-xl text-gray-500 mt-4 max-w-[600px]">
         When seeking a combination of interior design for your home, you deserve an exclusive and aesthetic touch.
@@ -108,8 +106,6 @@ const HeroSection = () => {
           alt="Furnishing Hero"
           layout="fill"
           objectFit="cover"
-          quality={100}
-          priority
           className="rounded-b-[2rem]"
         />
       )}

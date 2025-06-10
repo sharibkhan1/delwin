@@ -54,8 +54,8 @@ export function LayoutGridDemo() {
   const getImageByName = (name: string, id: number) => {
     const defaultImages: Record<number, string> = {
       1: "/d1.jpg",
-      2: "/assets/final@2x.jpg",
-      3: "/assets/FIN.jpg",
+      2: "/lod/imgg1.jpg",
+      3: "/lod/imgg2.jpg",
       4: "/iii.jpeg",
     };
   
