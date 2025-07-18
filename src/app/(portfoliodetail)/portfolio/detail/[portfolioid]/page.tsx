@@ -67,7 +67,7 @@ const PortfolioDetail = ({ params }: { params: Promise<{ portfolioid: string }> 
 
       {/* Image Gallery */}
       {portfolio.images?.length > 0 && (
-        <div className="mt-6 border-t-2 border-black ">
+        <div className="mt-6 border-t-2 border-white/50 ">
           <h2 className="text-4xl font-bold text-foreground mt-5">Gallery</h2>
           <div className="border-2 mt-4 rounded-md p-1 md:p-2 bg-secondary-foreground/90 z-10 ">
           <div className="grid border-2 bg-cream-beige rounded-md grid-cols-1 sm:grid-cols-2 p-2 md:p-5 md:grid-cols-3 gap-4 ">

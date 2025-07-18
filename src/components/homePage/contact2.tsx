@@ -92,15 +92,15 @@ const ContactPage = () => {
   
   return (
     <div className="max-w-7xl mx-auto  py-16 px-6">
-      <h2 className="text-4xl font-semibold text-center text-foreground mb-10">
-        Get <span className="text-primary/70">in Touch</span>
+      <h2 className="volkhov-bold text-4xl font-semibold text-center text-foreground mb-10">
+        Get <span className="text-primary/50">in Touch</span>
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {/* Left Side: Contact Details */}
         <div className="flex flex-col relative shadow-primary/60  justify-between bg-secondary rounded-2xl p-8 shadow-md hover:shadow-lg transition">
           <div className="flex items-start flex-col" >
-            <h3 className="text-2xl font-medium text-secondary-foreground mb-8">
+            <h3 className="text-2xl md:text-4xl font-medium text-secondary-foreground mb-8">
               Contact Information
             </h3>
             <ul className="space-y-5 text-secondary-foreground">
@@ -118,7 +118,7 @@ const ContactPage = () => {
 
           {/* Social Links */}
           <Image
-            src="/logo.png"
+            src="/logowhite.svg"
             alt="logo"
             width={200}
             height={200}
