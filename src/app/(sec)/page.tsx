@@ -144,11 +144,11 @@ const Page = () => {
   <div className="absolute top-[35%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center">
 
     <div><SvgIcon/></div>
-    <p ref={counterRef}>{counter}</p>
+    <p className="opacity-0" ref={counterRef}>{counter}</p>
   </div>
 
   <section className='hero top-[50%] left-[50%] w-screen h-screen ' >
-    <div className="overlay top-0 left-0 w-full bg-gray-700 h-full absolute "></div>
+    <div className="overlay top-0 left-0 w-full bg-[#efefef] h-full absolute "></div>
 
     {/* Centered Header */}
     <div className="header flex w-screen flex-col items-center text-center font-extrabold uppercase absolute md:top-[30%] top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
