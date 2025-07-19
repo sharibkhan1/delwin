@@ -120,8 +120,8 @@ const ContactPage = () => {
           <Image
             src="/logowhite.svg"
             alt="logo"
-            width={200}
-            height={200}
+            width={400}
+            height={400}
             className="mt-8 flex items-end"
           />
           {/* <div className="mt-8">
