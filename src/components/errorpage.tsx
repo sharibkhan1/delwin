@@ -37,7 +37,7 @@ export default function Custom404() {
           Reload
         </button>
         <Link
-          href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+          href="https://www.youtube.com/shorts/SXHMnicI6Pg"
           className="bg-white text-sm text-[#5f6368] border border-[#dadce0] px-4 py-2 rounded hover:bg-[#f1f3f4]"
         >
           Go to Homepage
