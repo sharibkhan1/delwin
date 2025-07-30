@@ -1,5 +1,8 @@
 // pages/404.tsx
 "use client";
+
+import Link from "next/link";
+
 export default function Custom404() {
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center bg-[#f2f2f2] text-center px-4">
@@ -33,6 +36,12 @@ export default function Custom404() {
         >
           Reload
         </button>
+        <Link
+          href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+          className="bg-white text-sm text-[#5f6368] border border-[#dadce0] px-4 py-2 rounded hover:bg-[#f1f3f4]"
+        >
+          Go to Homepage
+        </Link>
       </div>
     </div>
   );
